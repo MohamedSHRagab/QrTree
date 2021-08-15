@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mohamedragab.cashpos">
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.hardware.usb.UsbAccessory" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/scanner"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/scanner"
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.mohamedragab.cashpos.modules.employees.views.employee_login"></activity>
+        <activity android:name="com.mohamedragab.cashpos.modules.employees.views.new_delivery" />
+        <activity android:name="com.mohamedragab.cashpos.modules.employees.views.delivery_profile" />
+        <activity android:name="com.mohamedragab.cashpos.modules.employees.views.delivery" />
+        <activity android:name="com.mohamedragab.cashpos.modules.settings.views.cleardata" />
+        <activity android:name="com.mohamedragab.cashpos.modules.backup.backup" />
+        <activity android:name="com.mohamedragab.cashpos.modules.repair.views.laterepairs" />
+        <activity android:name="com.mohamedragab.cashpos.modules.repair.views.customerRepair" />
+        <activity android:name="com.mohamedragab.cashpos.modules.repair.views.omlarepair" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.masroufreport.views.masroufreport"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.employees.views.viewallcashiers"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.employees.views.newCashier"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.employees.views.cashiers"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.settings.views.shopinfo"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.settings.views.settings"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.latekist.views.latekists"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.rate.views.rateandcomment"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.kist.views.customerKist"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.kist.views.omalkist"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.developerprofile.developerprofile"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.store.views.addnewcategory"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.store.views.addnewmeasure"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.prizes.views.allprizes"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.prizes.views.addprize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.adminprofile.adminprofile"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.adminpanel.views.adminpanel"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.dashboard.views.dashboardadmin"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.notification.views.notification"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.blockscreen.blockscreen"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.graph.graph"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.shopmove.views.shopmove"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.buyinvoicedetails.views.buyinvoicedetails"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.buyinvoice.views.buyinvoice"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.scanner.scanner"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWITHBAR"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.invoicebuyback.views.invoicebuyView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.login.views.addnewshop"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omlatransactions.views.omlatransactions"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.moredtransactions.views.moredtransactions"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.login.views.shopdata"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.login.views.login"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.invoicedetails.views.invoicedetails"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.moneyboxreport.views.moneyboxreport"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.invoice.views.invoiceView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.store.views.viewproducts"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.store.views.addproduct"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.splash.splash"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.mored.views.viewallmored"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.mored.views.moredmoney"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omla.views.omlamoney"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omla.views.viewallomla"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.mored.views.rasedmored"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omla.views.rasedomla"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.mored.views.newmored"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omla.views.newcustomer"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.info.info"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.moneybox.views.moneybox"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.masrouf.masrof"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.mored.views.moward"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.omla.views.customers"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.store.views.store"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.buy.views.buy"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.sales.views.sales"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.home.MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.invoicesalesback.views.invoicesaleView"
+            android:windowSoftInputMode="stateHidden" />
+
+        <service android:name="com.mohamedragab.cashpos.modules.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notification" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <service android:name="net.posprinter.service.PosprinterService" />
+    </application>
+
+</manifest>

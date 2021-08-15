@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#343068</color>
+    <color name="colorPrimaryDark">#343068</color>
+    <color name="colorAccent">#9743F7</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#f44336</color>
+    <color name="yellow">#f6ee19</color>
+    <color name="green">#76ff03</color>
+    <color name="button_main">#4882C3</color>
+    <color name="button_dark">#4882C3</color>
+    <color name="button_unable">#cccccc</color>
+    <color name="disconnet_color">#ea0923</color>
+    <color name="edittextBG">#DADADA</color>
+    <color name="notwhite">#e1f5f3</color>
+    <color name="hint_foreground_material_light">#4882C3</color>
+    <color name="black">#000000</color>
+    <color name="card">#3E3B88</color>
+
+</resources>

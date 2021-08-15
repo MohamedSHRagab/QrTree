@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1044072439339",
+    "firebase_url": "https://cashpos-a1d65.firebaseio.com",
+    "project_id": "cashpos-a1d65",
+    "storage_bucket": "cashpos-a1d65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044072439339:android:ed17eadf081680c993946e",
+        "android_client_info": {
+          "package_name": "com.mohamedragab.cashpos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044072439339-h6467blhr4rct4es2ipom74fo7lpihhj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohamedragab.cashpos",
+            "certificate_hash": "012e38a24b020f74665417a429f54f7a8ae510d5"
+          }
+        },
+        {
+          "client_id": "1044072439339-es8t0hn5cfjn4thj4614jusva37ppb0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohamedragab.cashpos",
+            "certificate_hash": "485c3b1a50aebc05292bf3aac0c686fa25681dce"
+          }
+        },
+        {
+          "client_id": "1044072439339-h0a6cv0uslfo4mvvuqu6uotvda3m75e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4HAwZdLri-OxQGdZpJPPYlvhokprh4JA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044072439339-h0a6cv0uslfo4mvvuqu6uotvda3m75e4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

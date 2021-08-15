@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="تعديل بيانات الصنف"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/minus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/minus"
+            />
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittextborder2"
+            android:gravity="center"
+            android:text="1"
+            android:inputType="numberDecimal"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/plus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/add"
+            />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/check_equation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:text="معادلة رياضيه   "
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:id="@+id/equation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/tall1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.15"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="1"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:gravity="center"
+            android:text="×"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/tall2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.15"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="1"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:gravity="center"
+            android:text="×"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/quan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.15"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="1"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    >
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:background="@drawable/edittextborder2"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:text="السعر"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn"
+            android:text="حفظ"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/edittextborder2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="حذف الصنف من القائمه "
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+

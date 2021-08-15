@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context="com.mohamedragab.cashpos.modules.settings.views.cleardata"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:onClick="go_home"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="حذف بيانات التطبيق "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:onClick="delete_sell_invoices"
+                android:text="حذف فواتير البيع "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف فواتير الشراء "
+                android:onClick="delete_buy_invoices"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف المندوبين "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:onClick="delete_mored"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف بيانات الخزينه "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:onClick="delete_money_box"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف الموردين "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:onClick="delete_mords"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف العملاء "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:onClick="delete_customers"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف الاقساط كاملة "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:onClick="delete_kists"
+                android:padding="5dp"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="حذف المنتجات من المخزن "
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:onClick="delete_products"
+                android:background="#f1f1f1"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

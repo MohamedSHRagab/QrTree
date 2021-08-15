@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/forth"
+            android:icon="@drawable/ic_cancel_black_24dp"
+            android:title="ارجاع فاتوره مبيعات" />
+        <item
+            android:id="@+id/fifth"
+            android:icon="@drawable/ic_cancel_black_24dp"
+            android:title="ارجاع فاتوره مشتريات" />
+
+        <item
+            android:id="@+id/six"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title=" عرض فواتير البيع" />
+        <item
+            android:id="@+id/eight"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title=" عرض فواتير الشراء" />
+        <item
+            android:id="@+id/gh"
+            android:icon="@drawable/ic_trending_up_black_24dp"
+            android:title="  عرض حركه المتجر اليومية" />
+        <item
+            android:id="@+id/gh2"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:title="تقرير بتعاملات الخزينه" />
+
+        <item
+            android:id="@+id/admin"
+            android:icon="@drawable/user"
+            android:title="مطور البرنامج" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/icons_settings"
+            android:title="الاعدادات" />
+
+        <item
+            android:id="@+id/update"
+            android:icon="@drawable/ic_system_update_black_24dp"
+            android:title="تحديث البرنامج" />
+
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share_black_24dp"
+            android:title="مشاركة البرنامج" />
+        <item
+            android:id="@+id/chat"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="ارسال تعليقك لتطوير البرنامج" />
+
+    </group>
+
+
+</menu>

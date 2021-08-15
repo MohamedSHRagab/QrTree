@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:gravity="center"
+    android:minWidth="340dp"
+    android:orientation="vertical"
+    android:padding="20dp">
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="إضغط لإختيار بداية ونهاية البحث"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:text=" من "
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/search_date"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edittextborder2"
+            android:drawableRight="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textSize="14dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:text=" إلي  "
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/search_date2"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edittextborder2"
+            android:drawableRight="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textSize="14dp" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:gravity="start"
+             android:text=" الكاشير  "
+             android:textColor="@color/colorPrimary"
+             android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/edittextborder2">
+
+            <Spinner
+                android:id="@+id/cashierspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></Spinner>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn"
+            android:text="حفظ"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/edittextborder2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="الغاء"
+            android:textColor="@color/red"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

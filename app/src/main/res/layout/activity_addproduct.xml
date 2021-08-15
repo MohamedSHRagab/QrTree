@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mohamedragab.cashpos.modules.store.views.addproduct">
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="اضافة منتج جديد"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="#ffffff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:onClick="captureimage">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image"
+                            android:layout_width="85dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="7dp"
+                            android:src="@drawable/capimage"
+                            app:civ_border_color="@color/edittextBG"
+                            app:civ_border_width="1dp" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/camera" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/barcodeimage"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/barcode"
+                            android:layout_width="200dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/barcodeprice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:textColor="#000000"
+                                android:textSize="10sp"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/barcodetext"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textColor="#000000"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/print"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="2.2"
+                            android:onClick="print_barcode"
+                            android:padding="5dp"
+                            android:src="@drawable/printer_icon"
+                            android:tint="@color/colorPrimary" />
+
+                        <EditText
+                            android:id="@+id/code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/edittextborder2"
+                            android:gravity="center"
+                            android:hint="الباركود"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/scan"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="2"
+                            android:padding="5dp"
+                            android:src="@drawable/barcode"
+                            android:tint="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text=" اسم المنتج بالمواصفات تفصيلي "
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="ملاحظات علي المنتج"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="سعر الشراء"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/buyprice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextborder2"
+                                android:gravity="center"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="5dp"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="التصنيف"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/edittextborder2"
+                                android:padding="5dp">
+
+
+                                <Spinner
+                                    android:id="@+id/category_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></Spinner>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="سعر البيع 1"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/sellprice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextborder2"
+                                android:gravity="center"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="سعر البيع 2"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/sellprice2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextborder2"
+                                android:gravity="center"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="سعر البيع 3"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/sellprice3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextborder2"
+                                android:gravity="center"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="5dp"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="وحدة القياس الصغري"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/border"
+                                android:padding="5dp">
+
+                                <Spinner
+                                    android:id="@+id/measure"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></Spinner>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="20dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="عدد الوحدة الصغري"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/amount2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:hint="عدد الوحدة الصغري"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:text="1"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="وحدة القياس 2"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/border"
+                                android:padding="5dp">
+
+                                <Spinner
+                                    android:id="@+id/measure2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></Spinner>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="20dp" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="5dp"
+                            android:layout_height="0dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="عدد الوحدة الصغري"
+                                android:textSize="10sp" />
+
+                            <EditText
+                                android:id="@+id/amount3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:hint="عدد الوحدة الصغري"
+                                android:inputType="numberDecimal"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:padding="5dp"
+                                android:singleLine="true"
+                                android:text="1"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text="وحدة القياس 3"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/border"
+                                android:padding="5dp">
+
+                                <Spinner
+                                    android:id="@+id/measure3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></Spinner>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="20dp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="الكمية المتاحة في المخزن "
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/quantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittextborder2"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:id="@+id/check_equation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:text="معادلة رياضيه   "
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:id="@+id/equation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+
+                        <EditText
+                            android:id="@+id/tall1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.15"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="1"
+                            android:textColor="@color/red"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:text="×"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+                        <EditText
+                            android:id="@+id/tall2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.15"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="1"
+                            android:textColor="@color/red"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:text="×"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+                        <EditText
+                            android:id="@+id/quan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.15"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="1"
+                            android:textColor="@color/red"
+                            android:textSize="12sp" />
+
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/expiredate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/edittextborder2"
+                            android:editable="false"
+                            android:gravity="center"
+                            android:maxLength="50"
+                            android:padding="5dp"
+                            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="تاريخ انتهاء الصلاحيه"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12dp"
+                            android:tint="#ffffff" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/delete_product"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@drawable/edittextborder2"
+                            android:onClick="go_delete_product"
+                            android:text="حذف المنتج"
+                            android:textColor="@color/red"
+                            android:textSize="15sp"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn"
+                            android:onClick="save"
+                            android:text=" حفظ البيانات "
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
