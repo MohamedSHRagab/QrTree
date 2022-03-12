@@ -20,6 +20,30 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".8"
+                android:text="  تم الاستلام   "
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <CheckBox
+                android:id="@+id/statue"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:gravity="center" />
+        </LinearLayout>
+
         <RadioGroup
 
             android:id="@+id/radio_gender"
@@ -35,8 +59,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="قسط"
-                android:textColor="@color/white"
-                />
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/agel"
@@ -45,19 +68,54 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="دفع أجل"
-                android:textColor="@color/white"
-                />
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/cash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:checked="true"
                 android:gravity="center"
                 android:text="دفع كاش "
-                android:textColor="@color/white"
-                />
+                android:checked="true"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="تحويل بنكي "
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/pos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="فيزا"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:gravity="center"
+                android:text="نقدي"
+                android:textColor="@color/white" />
+
+
         </RadioGroup>
 
         <View
@@ -68,8 +126,7 @@
             android:id="@+id/firstlinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -214,12 +271,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:padding="10dp"
-                android:background="@drawable/edittextborder2">
+                android:background="@drawable/edittextborder2"
+                android:padding="10dp">
+
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/omla"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -230,7 +288,8 @@
             android:id="@+id/kestlinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -277,86 +336,284 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:padding="10dp"
-                android:background="@drawable/edittextborder2">
+                android:background="@drawable/edittextborder2"
+                android:padding="10dp">
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/omla2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <RadioGroup
+            <RadioGroup
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/before"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="نسبه الفائده بعد المقدم"
-                android:textColor="@color/white"
+                android:orientation="horizontal">
 
-                android:textSize="13sp" />
+                <RadioButton
+                    android:id="@+id/before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="نسبه الفائده بعد المقدم"
+                    android:textColor="@color/white"
 
-            <RadioButton
-                android:id="@+id/after"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/after"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="نسبه الفائده قبل المقدم"
+                    android:textColor="@color/white"
+
+                    android:textSize="13sp" />
+            </RadioGroup>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:gravity="center"
-                android:text="نسبه الفائده قبل المقدم"
-                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                android:textSize="13sp" />
-        </RadioGroup>
+                <TextView
+                    android:id="@+id/total2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="17dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="اجمالي المبلغ"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/total2"
+
+            <LinearLayout
+                android:id="@+id/profitfirst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17dp" />
+                android:orientation="vertical">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/profit_percentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".7"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="@color/red"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dp"
+                        android:text=" نسبه الفائده %"
+                        android:textColor="@color/white"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".7"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:padding="10dp"
+                        android:text="0"
+                        android:textColor="@color/red"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dp"
+                        android:text="مقدم"
+                        android:textColor="@color/white"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profitafter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/first2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".7"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="@color/red"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dp"
+                        android:text="مقدم"
+                        android:textColor="@color/white"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/profit_percentage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".7"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:hint=""
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="@color/red"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dp"
+                        android:text=" نسبه الربح%"
+                        android:textColor="@color/white"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/totalafterfirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="المتبقي"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <RadioGroup
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:gravity="center"
-                android:padding="20dp"
-                android:text="اجمالي المبلغ"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
+                <RadioButton
+                    android:id="@+id/week"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="اسبوعي"
+                    android:textColor="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/profitfirst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="شهري"
+                    android:textColor="@color/white" />
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -364,7 +621,134 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/profit_percentage"
+                    android:id="@+id/mon_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textColor="@color/red"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/monthorweekname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="عدد الاشهر"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/kest_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="قيمة القسط"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/firstdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="تاريخ استحقاق اول قسط"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/damenname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight=".7"
+                    android:background="@drawable/edittextborder2"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textColor="@color/red"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="اسم الضامن"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/damenphone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -385,368 +769,123 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="20dp"
-                    android:text=" نسبه الفائده %"
+                    android:text="تليفون الضامن"
                     android:textColor="@color/white"
                     android:textSize="17dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/first"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight=".7"
-                    android:background="@drawable/edittextborder2"
-                    android:text="0"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:padding="10dp"
-                    android:textColor="@color/red"
-                    android:textSize="17dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text="مقدم"
-                    android:textColor="@color/white"
-                    android:textSize="17dp" />
-            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/profitafter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/first2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight=".7"
-                    android:background="@drawable/edittextborder2"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:padding="10dp"
-                    android:textColor="@color/red"
-                    android:textSize="17dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text="مقدم"
-                    android:textColor="@color/white"
-                    android:textSize="17dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/profit_percentage2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight=".7"
-                    android:background="@drawable/edittextborder2"
-                    android:gravity="center"
-                    android:hint=""
-                    android:inputType="number"
-                    android:padding="10dp"
-                    android:textColor="@color/red"
-                    android:textSize="17dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text=" نسبه الربح%"
-                    android:textColor="@color/white"
-                    android:textSize="17dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/totalafterfirst"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="المتبقي"
-                android:textColor="@color/white"
-                android:textSize="17dp" />
-        </LinearLayout>
-
-        <RadioGroup
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/week"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="اسبوعي"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/month"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:gravity="center"
-                android:text="شهري"
-                android:textColor="@color/white" />
-        </RadioGroup>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/mon_num"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textColor="@color/red"
-                android:textSize="17dp" />
-
-            <TextView
-                android:id="@+id/monthorweekname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="عدد الاشهر"
-                android:textColor="@color/white"
-                android:textSize="17dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/kest_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="قيمة القسط"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/firstdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="تاريخ استحقاق اول قسط"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/damenname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textColor="@color/red"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="اسم الضامن"
-                android:textColor="@color/white"
-                android:textSize="17dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/damenphone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".7"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textColor="@color/red"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="تليفون الضامن"
-                android:textColor="@color/white"
-                android:textSize="17dp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:orientation="vertical"
+    android:id="@+id/notpaidcash"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cancel"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn"
-            android:text="الغاء"
-            android:textColor="#FFFFFF"
-            android:textSize="17dp" />
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight=".7"
-            android:background="@drawable/btn"
-            android:text="تسجيل عملية البيع"
-            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:text="باقي"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".7"
+            android:gravity="center"
+            android:text="استلام نقدية "
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/notpaidmoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".7"
+            android:background="@drawable/edittextborder2"
+            android:gravity="center"
+            android:hint=""
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/red"
             android:textSize="17dp" />
 
+        <EditText
+            android:id="@+id/paidmoneytotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".7"
+            android:background="@drawable/edittextborder2"
+            android:gravity="center"
+            android:hint=""
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/red"
+            android:textSize="17dp" />
     </LinearLayout>
-</LinearLayout></ScrollView>
+
+</LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn"
+                android:text="الغاء"
+                android:textColor="#FFFFFF"
+                android:textSize="17dp" />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight=".7"
+                android:background="@drawable/btn"
+                android:text="تسجيل عملية البيع"
+                android:textColor="#FFFFFF"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

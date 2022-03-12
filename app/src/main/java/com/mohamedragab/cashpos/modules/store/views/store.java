@@ -6,8 +6,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mohamedragab.cashpos.modules.notification.views.notification;
 import com.mohamedragab.cashpos.R;
+import com.mohamedragab.cashpos.modules.exchange.views.exchange;
+import com.mohamedragab.cashpos.modules.notification.views.notification;
 
 public class store extends AppCompatActivity {
 
@@ -49,5 +50,10 @@ public class store extends AppCompatActivity {
     public void go_add_new_measure(View view) {
         startActivity(new Intent(this, addnewmeasure.class));
         finish();
+    }
+
+    public void report_quantity(View view) {
+        startActivity(new Intent(this, exchange.class));
+
     }
 }

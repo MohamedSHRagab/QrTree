@@ -69,6 +69,7 @@ public class invoiceAdapter extends ArrayAdapter {
                 String value = invoiceLists.get(position).getInvoice_id();
                 Intent i = new Intent(con, invoicedetails.class);
                 i.putExtra("key", value);
+                i.putExtra("client", invoiceLists.get(position).getCustomer_name());
                 con.startActivity(i);
                 ((Activity) con).finish();
 

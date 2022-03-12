@@ -41,7 +41,7 @@ public class dashboardadmin extends AppCompatActivity {
 
 
         shopList = new ArrayList<>();
-        shopAdapter = new shopAdapter(getBaseContext(), shopList);
+        shopAdapter = new shopAdapter(dashboardadmin.this, shopList);
 
         shopsListView = (ListView) findViewById(R.id.list_shops);
 

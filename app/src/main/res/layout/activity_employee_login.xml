@@ -75,7 +75,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="اسم المستخدم"
+                            android:text="UserName"
+                            android:gravity="center"
+                            android:textColor="@color/red"
                             android:layout_marginBottom="8dp"
                             android:textSize="14sp" />
 
@@ -100,8 +102,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="كلمة المرور"
-                            android:textSize="14sp" />
+                            android:text="Password"
+                            android:gravity="center"
+                            android:textColor="@color/red"/>                            android:textSize="14sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -144,7 +147,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="الدخول كأدمن "
+                            android:text="الدخول بحساب التفعيل "
                             android:onClick="go_login"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/colorPrimary"

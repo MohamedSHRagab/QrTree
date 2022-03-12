@@ -83,7 +83,7 @@ public class cashierAdapter extends ArrayAdapter {
 
                 dialog.show();*/
             }else{
-                String value = cashiers.get(position).getId()+"";
+                String value = cashiers.get(position).getName()+"";
                 Intent i = new Intent(con, delivery_profile.class);
                 i.putExtra("key", value);
                 con.startActivity(i);

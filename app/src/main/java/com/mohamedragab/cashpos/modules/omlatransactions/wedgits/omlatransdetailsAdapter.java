@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.modules.invoicedetails.views.invoicedetails;
 import com.mohamedragab.cashpos.modules.omlatransactions.models.omlatransaction;
+import com.mohamedragab.cashpos.modules.omlatransactions.views.omlatransactions;
 import com.mohamedragab.cashpos.utils.Round;
 
 import java.util.List;
@@ -64,6 +65,9 @@ public class omlatransdetailsAdapter extends ArrayAdapter {
                     i.putExtra("key", value2);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                     con.startActivity(i);
+                }
+                if (omlatransactionList.get(position).getInvoiceId().equals("-")&&omlatransactionList.get(position).getProcess().equals("دفع")){
+                    omlatransactions.reciptdate=omlatransactionList.get(position).getDate();
                 }
             }
 

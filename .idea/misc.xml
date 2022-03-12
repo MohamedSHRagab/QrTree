@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout-ar/price_item.xml" value="0.15765765765765766" />
+        <entry key="app/src/main/res/layout/activity_addnewcategory.xml" value="0.2902222222222222" />
+        <entry key="app/src/main/res/layout/activity_adminpanel.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_cashiers.xml" value="0.15765765765765766" />
+        <entry key="app/src/main/res/layout/activity_cleardata.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_customer_kist.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_dashboardadmin.xml" value="0.15244444444444444" />
+        <entry key="app/src/main/res/layout/activity_exchange.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_info.xml" value="0.15360360360360362" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_newcustomer.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_omlatransactions.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_sales.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/activity_shopinfo.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/after_sales_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/after_sales_dialog2.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/edititeminsale2.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/finalinsale.xml" value="0.15466666666666667" />
+        <entry key="app/src/main/res/layout/price_item.xml" value="0.15765765765765766" />
+        <entry key="app/src/main/res/layout/prices_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_item.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/row_item2.xml" value="0.29414414414414414" />
+        <entry key="app/src/main/res/layout/show_image_dialog.xml" value="0.29414414414414414" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

@@ -139,6 +139,10 @@ public class shopinfo extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.choosecameradialog);
 
+        info=null;
+        logo.setImageBitmap(null);
+
+
         Button camera = (Button) dialog.findViewById(R.id.camera);
         camera.setOnClickListener(v -> {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -183,7 +187,7 @@ public class shopinfo extends AppCompatActivity {
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 Bitmap theImage = selectedImage;
                 int size = theImage.getByteCount();
-                if (size > 7000000) {
+                if (size > 10000000) {
                     Toast.makeText(getBaseContext(), "حجم الصوره كبير جدا  !", Toast.LENGTH_SHORT).show();
                 } else {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();

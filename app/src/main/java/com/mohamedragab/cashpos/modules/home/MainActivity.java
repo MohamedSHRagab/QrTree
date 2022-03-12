@@ -1,5 +1,7 @@
 package com.mohamedragab.cashpos.modules.home;
 
+import static com.mohamedragab.cashpos.base.AppConfig.request_permission;
+
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -14,7 +16,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -43,7 +44,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -53,24 +53,37 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mohamedragab.cashpos.BuildConfig;
+import com.mohamedragab.cashpos.R;
+import com.mohamedragab.cashpos.base.AppConfig;
+import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
+import com.mohamedragab.cashpos.modules.adminpanel.models.adminmodel;
 import com.mohamedragab.cashpos.modules.adminpanel.views.adminpanel;
 import com.mohamedragab.cashpos.modules.backup.backup;
 import com.mohamedragab.cashpos.modules.blockscreen.blockscreen;
+import com.mohamedragab.cashpos.modules.buy.views.buy;
 import com.mohamedragab.cashpos.modules.buyinvoice.views.buyinvoice;
 import com.mohamedragab.cashpos.modules.dashboard.views.dashboardadmin;
+import com.mohamedragab.cashpos.modules.developerprofile.developerprofile;
 import com.mohamedragab.cashpos.modules.employees.models.Cashier;
 import com.mohamedragab.cashpos.modules.employees.views.cashiers;
 import com.mohamedragab.cashpos.modules.employees.views.delivery;
 import com.mohamedragab.cashpos.modules.employees.views.employee_login;
+import com.mohamedragab.cashpos.modules.info.info;
 import com.mohamedragab.cashpos.modules.invoice.views.invoiceView;
 import com.mohamedragab.cashpos.modules.invoicebuyback.views.invoicebuyView;
 import com.mohamedragab.cashpos.modules.invoicesalesback.views.invoicesaleView;
 import com.mohamedragab.cashpos.modules.kist.views.omalkist;
 import com.mohamedragab.cashpos.modules.login.models.User;
 import com.mohamedragab.cashpos.modules.masrouf.masrof;
+import com.mohamedragab.cashpos.modules.moneybox.views.moneybox;
+import com.mohamedragab.cashpos.modules.moneyboxreport.views.moneyboxreport;
 import com.mohamedragab.cashpos.modules.mored.views.moward;
 import com.mohamedragab.cashpos.modules.notification.views.notification;
+import com.mohamedragab.cashpos.modules.omla.views.customers;
 import com.mohamedragab.cashpos.modules.prizes.models.prize;
+import com.mohamedragab.cashpos.modules.prizes.views.allprizes;
+import com.mohamedragab.cashpos.modules.rate.views.rateandcomment;
 import com.mohamedragab.cashpos.modules.repair.views.omlarepair;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
 import com.mohamedragab.cashpos.modules.sales.views.sales;
@@ -79,19 +92,6 @@ import com.mohamedragab.cashpos.modules.shopmove.views.shopmove;
 import com.mohamedragab.cashpos.modules.store.views.store;
 import com.mohamedragab.cashpos.utils.Conts;
 import com.mohamedragab.cashpos.utils.DeviceReceiver;
-import com.mohamedragab.cashpos.BuildConfig;
-import com.mohamedragab.cashpos.R;
-import com.mohamedragab.cashpos.base.AppConfig;
-import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
-import com.mohamedragab.cashpos.modules.adminpanel.models.adminmodel;
-import com.mohamedragab.cashpos.modules.buy.views.buy;
-import com.mohamedragab.cashpos.modules.developerprofile.developerprofile;
-import com.mohamedragab.cashpos.modules.info.info;
-import com.mohamedragab.cashpos.modules.moneybox.views.moneybox;
-import com.mohamedragab.cashpos.modules.moneyboxreport.views.moneyboxreport;
-import com.mohamedragab.cashpos.modules.omla.views.customers;
-import com.mohamedragab.cashpos.modules.prizes.views.allprizes;
-import com.mohamedragab.cashpos.modules.rate.views.rateandcomment;
 
 import net.posprinter.posprinterface.IMyBinder;
 import net.posprinter.posprinterface.UiExecute;
@@ -112,15 +112,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import jxl.Workbook;
-import jxl.WorkbookSettings;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-
-import static com.mohamedragab.cashpos.base.AppConfig.request_permission;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     DrawerLayout drawerLayout;
@@ -237,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         setlistener();
-        readexcel();
         actionMenu();
 
 
@@ -330,7 +320,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 } else {
 
-                                    upload("report.xls");
                                     reference2.child("backupdate").setValue(formattedDate);
 
                                 }
@@ -575,34 +564,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void upload(String filename) {
-
-        if (filename.equals("report.xls")) {
-            create_excel();
-        }
-        Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/cashpos/" + filename));
-        StorageReference reference;
-        if (filename.equals("report.xls")) {
-            reference = storageReference.child("uploads/" + shopname.getText().toString().trim() + "/" + "report" + ".xls");
-        } else {
-            reference = storageReference.child("uploads/" + shopname.getText().toString().trim() + "/" + filename);
-        }
-        reference.putFile(uri)
-                .addOnSuccessListener(taskSnapshot -> {
-                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!uriTask.isComplete()) ;
-                    Uri uri1 = uriTask.getResult();
-                    upload upload = new upload(System.currentTimeMillis() + "", uri1.toString());
-                    if (filename.equals("report.xls")) {
-                        reference2.child("datalink").setValue(upload.getUrl());
-                        //  Toast.makeText(getBaseContext(), "تم الاحتفاظ بالنسخه الاحتياطيه", Toast.LENGTH_SHORT).show();
-                    }
-
-                }).addOnProgressListener(taskSnapshot -> {
-
-        });
-
-    }
 
 
     @Override
@@ -676,80 +637,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void create_excel() {
-        String Fnamexls = "report" + ".xls";
-
-        File sdCard = Environment.getRootDirectory();
-        File directory = new File(sdCard.getAbsolutePath() + "/cashpos/");
-        directory.mkdirs();
-
-        File file = new File(directory, Fnamexls);
-
-        WorkbookSettings wbSettings = new WorkbookSettings();
-        wbSettings.setLocale(new Locale("en", "EN"));
-
-        WritableWorkbook workbook;
-        try {
-            //int a = 1;
-            workbook = Workbook.createWorkbook(file, wbSettings);
-            WritableSheet sheet = workbook.createSheet("First Sheet", 0);
-            Label h1 = new Label(0, 0, " رقم المنتج ");
-            Label h2 = new Label(1, 0, " اسم المنتج ");
-            Label h3 = new Label(2, 0, " وصف المنتج ");
-            Label h4 = new Label(3, 0, " سعر البيع ");
-            Label h5 = new Label(4, 0, " الكميه المباعه ");
-            Label h6 = new Label(5, 0, " تاريخ البيع ");
-            Cursor res = db.getallsellproducts();
-
-
-            try {
-                sheet.addCell(h1);
-                sheet.addCell(h2);
-                sheet.addCell(h3);
-                sheet.addCell(h4);
-                sheet.addCell(h5);
-                sheet.addCell(h6);
-                if (res != null && res.getCount() > 0) {
-                    int index = 1;
-                    while (res.moveToNext()) {
-                        Label l1 = new Label(0, index, res.getString(9));
-                        Label l2 = new Label(1, index, res.getString(4));
-                        Label l3 = new Label(2, index, res.getString(5));
-                        Label l4 = new Label(3, index, res.getString(6));
-                        Label l5 = new Label(4, index, res.getString(2));
-                        Label l6 = new Label(5, index, res.getString(8));
-
-
-                        sheet.addCell(l1);
-                        sheet.addCell(l2);
-                        sheet.addCell(l3);
-                        sheet.addCell(l4);
-                        sheet.addCell(l5);
-                        sheet.addCell(l6);
-                        index++;
-
-                    }
-                }
-
-            } catch (RowsExceededException e) {
-                e.printStackTrace();
-            } catch (WriteException e) {
-                e.printStackTrace();
-            }
-            workbook.write();
-
-            try {
-                workbook.close();
-            } catch (WriteException e) {
-
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void go_sales(View view) {
         if (SheredPrefranseHelper.getcurrentcashier(getBaseContext()) != null) {
@@ -857,77 +744,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(this, notification.class));
     }
 
-    void readexcel() {
-        String Fnamexls = "report.xls";
-
-        File directory = new File(Environment.getExternalStorageDirectory() + "/cashpos/");
-        directory.mkdirs();
-
-        File file = new File(directory, Fnamexls);
-
-        WorkbookSettings wbSettings = new WorkbookSettings();
-        wbSettings.setLocale(new Locale("en", "EN"));
-
-        WritableWorkbook workbook;
-        try {
-            //int a = 1;
-            workbook = Workbook.createWorkbook(file, wbSettings);
-            WritableSheet sheet = workbook.createSheet("First Sheet", 0);
-            Label h1 = new Label(0, 0, " رقم المنتج ");
-            Label h2 = new Label(1, 0, " اسم المنتج ");
-            Label h3 = new Label(2, 0, " وصف المنتج ");
-            Label h4 = new Label(3, 0, " سعر البيع ");
-            Label h5 = new Label(4, 0, " الكميه المباعه ");
-            Label h6 = new Label(5, 0, " تاريخ البيع ");
-            Cursor res = db.getallsellproducts();
-
-
-            try {
-                sheet.addCell(h1);
-                sheet.addCell(h2);
-                sheet.addCell(h3);
-                sheet.addCell(h4);
-                sheet.addCell(h5);
-                sheet.addCell(h6);
-                if (res != null && res.getCount() > 0) {
-                    int index = 1;
-                    while (res.moveToNext()) {
-                        Label l1 = new Label(0, index, res.getString(9));
-                        Label l2 = new Label(1, index, res.getString(4));
-                        Label l3 = new Label(2, index, res.getString(5));
-                        Label l4 = new Label(3, index, res.getString(6));
-                        Label l5 = new Label(4, index, res.getString(2));
-                        Label l6 = new Label(5, index, res.getString(8));
-
-                        sheet.addCell(l1);
-                        sheet.addCell(l2);
-                        sheet.addCell(l3);
-                        sheet.addCell(l4);
-                        sheet.addCell(l5);
-                        sheet.addCell(l6);
-                        index++;
-
-                    }
-                }
-
-            } catch (RowsExceededException e) {
-                e.printStackTrace();
-            } catch (WriteException e) {
-                e.printStackTrace();
-            }
-            workbook.write();
-
-            try {
-                workbook.close();
-            } catch (WriteException e) {
-
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void go_prizes(View view) {
         if (SheredPrefranseHelper.getUserData(this) == null && SheredPrefranseHelper.getAdminData(this) == null) {

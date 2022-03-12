@@ -42,17 +42,20 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/printer"
                 android:layout_width="35dp"
                 android:layout_height="40dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_alignParentRight="true"
-                android:onClick="go_home"
-                android:src="@drawable/printeroffline"
-                />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="reprint_invoice"
+                android:src="@drawable/printeroffline" />
         </RelativeLayout>
         <TextView
             android:id="@+id/name"

@@ -663,7 +663,79 @@
                             android:layout_margin="10dp"
                             android:background="@drawable/btn_rounded2"
                             android:gravity="center"
-                            android:text="اجمالي رأس المال بسعر البيع"
+                            android:text="اجمالي رأس المال بسعر البيع 1"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp" />
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/bluebox">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/report"
+                                android:tint="#ffffff" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="go_total_buy2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/btn_rounded2"
+                            android:gravity="center"
+                            android:text=" اجمالي رأس المال بسعر البيع 2"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp" />
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/bluebox">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/report"
+                                android:tint="#ffffff" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="go_total_buy3">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/btn_rounded2"
+                            android:gravity="center"
+                            android:text="اجمالي رأس المال بسعر البيع 3"
                             android:textColor="#ffffff"
                             android:textSize="14dp" />
 

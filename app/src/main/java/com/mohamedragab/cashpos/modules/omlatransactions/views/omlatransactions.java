@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,6 +72,7 @@ public class omlatransactions extends AppCompatActivity {
     ImageView printer_status;
     Receiver netReciever;
     LinearLayout container;
+    public static String reciptdate="";
 
     @Override
     protected void onStart() {
@@ -169,12 +171,12 @@ public class omlatransactions extends AppCompatActivity {
             Date c = Calendar.getInstance().getTime();
 
             SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-            String formattedDate= df.format(c);
+            String formattedDate = df.format(c);
 
-            SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss", Locale.US);
+            SimpleDateFormat df2 = new SimpleDateFormat("ddMMyyyyhhmmss", Locale.US);
             String formattedDate2 = df2.format(c);
             omlatransaction.setInvoiceId("-");
-            omlatransaction.setDate(formattedDate);
+            omlatransaction.setDate(formattedDate2);
             omlatransaction.setName(name.getText().toString());
             omlatransaction.setNotpaid(0);
             omlatransaction.setProcess("دفع");
@@ -219,8 +221,15 @@ public class omlatransactions extends AppCompatActivity {
 
                             if (db.insert_date(money)) {
                                 final Dialog after_dialog = new Dialog(omlatransactions.this);
-                                after_dialog.setContentView(R.layout.after_pay_dialog);
-                                // after_dialog.getWindow().setLayout(570, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                if (SheredPrefranseHelper.getprinter_type(omlatransactions.this) != null) {
+                                    if (SheredPrefranseHelper.getprinter_type(omlatransactions.this).equals("58")) {
+                                        after_dialog.setContentView(R.layout.after_pay_dialog2);
+                                    } else {
+                                        after_dialog.setContentView(R.layout.after_pay_dialog);
+                                    }
+                                } else {
+                                    after_dialog.setContentView(R.layout.after_pay_dialog);
+                                }                                // after_dialog.getWindow().setLayout(570, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 after_dialog.setCancelable(false);
 
 
@@ -286,17 +295,20 @@ public class omlatransactions extends AppCompatActivity {
                                     print.setEnabled(false);
                                 }
                                 print.setOnClickListener(v1 -> {
-                                    View image_png = (View) invoice_image;
+                                    View image_png = invoice_image;
                                     Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
                                     Canvas canvas = new Canvas(returnedBitmap);
                                     Drawable bgDrawable = image_png.getBackground();
                                     if (bgDrawable != null) {
                                         bgDrawable.draw(canvas);
                                     } else {
-                                        canvas.drawColor(Color.WHITE);
+                                        canvas.drawColor(-1);
                                     }
                                     image_png.draw(canvas);
-                                    printImage(returnedBitmap);
+                                    Bitmap[][] list_pic = splitBitmap(returnedBitmap, 1, (returnedBitmap.getHeight() / 1390) + 1);
+                                    for (int i = 0; i < (returnedBitmap.getHeight() / 1390) + 1; i++) {
+                                        printImage(list_pic[0][i]);
+                                    }
                                 });
                                 share.setOnClickListener(v1 -> {
                                     View image_png = (View) invoice_image;
@@ -311,12 +323,12 @@ public class omlatransactions extends AppCompatActivity {
                                     image_png.draw(canvas);
 
                                     try {
-                                        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid/", client.getText().toString()+formattedDate  + ".png");
+                                        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid/", formattedDate2 + ".png");
                                         FileOutputStream out = new FileOutputStream(file);
                                         returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                         out.close();
                                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/agelpaid/" + client.getText().toString()+formattedDate  + ".png");
+                                        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/agelpaid/" + formattedDate2 + ".png");
                                         sharingIntent.setType("image/png");
                                         sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
                                         startActivity(Intent.createChooser(sharingIntent, "مشاركة الإيصال"));
@@ -343,7 +355,7 @@ public class omlatransactions extends AppCompatActivity {
                                     image_png.draw(canvas);
 
                                     try {
-                                        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid/", client.getText().toString()+formattedDate  + ".png");
+                                        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid/", formattedDate2 + ".png");
                                         FileOutputStream out = new FileOutputStream(file);
                                         returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                         out.close();
@@ -446,27 +458,79 @@ public class omlatransactions extends AppCompatActivity {
                 showSnackbar("failed");
             }
         }, () -> {
-          /*  List<byte[]> list = new ArrayList<byte[]>();
-            list.add(DataForSendToPrinterPos80.initializePrinter());
-            list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66, 1));
 
-            list.add(DataForSendToPrinterPos80.printRasterBmp(
-                    0, printBmp, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left, 656));
-            list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66, 1));
-
-
-            return list;*/
             List<byte[]> list = new ArrayList<byte[]>();
             list.add(DataForSendToPrinterPos80.initializePrinter());
             list.add(DataForSendToPrinterPos80.printRasterBmp(
-                    0, printBmp, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Center, 445));
-//                list.add(DataForSendToPrinterPos80.printAndFeedForward(3));
-            list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66, 1));
+                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Left, 590));
             return list;
         });
+    }
+
+
+    public void reprint_invoice(View view) {
+        final Dialog dialog = new Dialog(omlatransactions.this);
+        dialog.setContentView(R.layout.show_image_dialog);
+        dialog.setCancelable(false);
+        ImageView invoice = (ImageView) dialog.findViewById(R.id.invoice);
+        ImageView print = (ImageView) dialog.findViewById(R.id.print);
+        if (MainActivity.ISCONNECT) {
+            print.setImageResource(R.drawable.printerconnected);
+        } else {
+            print.setImageResource(R.drawable.printeroffline);
+        }
+        print.setOnClickListener(view1 -> {
+            if (MainActivity.ISCONNECT) {
+                File docsFolder = new File(Environment.getExternalStorageDirectory() + "/cashpos/" + "/agelpaid");
+                if (!docsFolder.exists()) {
+                    docsFolder.mkdir();
+                }
+
+                String pdfname = reciptdate + ".png";
+                File pdfFile = new File(docsFolder.getAbsolutePath(), pdfname);
+                Bitmap bitmap = BitmapFactory.decodeFile(pdfFile.getPath());
+
+                try {
+                    Bitmap[][] list_pic = splitBitmap(bitmap, 1, (bitmap.getHeight() / 1390) + 1);
+                    for (int i = 0; i < (bitmap.getHeight() / 1390) + 1; i++) {
+                        printImage(list_pic[0][i]);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(getBaseContext(), "الطابعه غير متصله !", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ImageView share = (ImageView) dialog.findViewById(R.id.share);
+        share.setOnClickListener(view1 -> {
+            try {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/agelpaid/" + reciptdate + ".png");
+                sharingIntent.setType("image/png");
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
+
+            } catch (Exception e) {
+                Toast.makeText(getBaseContext(), "الملف غير موجود !", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ImageView cancel = (ImageView) dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(view1 -> {
+            dialog.dismiss();
+        });
+        try {
+            String pdfname = Environment.getExternalStorageDirectory() + "/cashpos/agelpaid/" + reciptdate + ".png";
+            Bitmap bitmap = BitmapFactory.decodeFile(pdfname);
+            invoice.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            Toast.makeText(getBaseContext(), "صوره الايصال غير موجوده !", Toast.LENGTH_SHORT).show();
+        }
+        dialog.show();
 
 
     }
+
 
     private class Receiver extends BroadcastReceiver {
 
@@ -490,7 +554,7 @@ public class omlatransactions extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         netReciever = new Receiver();
-        registerReceiver(netReciever, new IntentFilter(MainActivity.DISCONNECT));
+        // unregisterReceiver(netReciever);
 
         if (!MainActivity.ISCONNECT) {
             showSnackbar(getString(R.string.con_has_discon));
@@ -520,22 +584,22 @@ public class omlatransactions extends AppCompatActivity {
                             if (SheredPrefranseHelper.getprinter_type(omlatransactions.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 576, false);
+                                b2 = resizeImage(b2, 590, false);
                             }
                         } else {
                             b2 = resizeImage(b2, 335, false);
                         }
                         printpicCode(b2);
                     } else {
-                        showSnackbar("bimap  " + b2.getWidth() + "  height: " + b2.getHeight());
+
                         if (SheredPrefranseHelper.getprinter_type(omlatransactions.this) != null) {
                             if (SheredPrefranseHelper.getprinter_type(omlatransactions.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 576, false);
+                                b2 = resizeImage(b2, 590, false);
                             }
                         } else {
-                            b2 = resizeImage(b2, 576, false);
+                            b2 = resizeImage(b2, 335, false);
                         }
                         AppConfig.printUSBbitamp(b2);
 
@@ -551,6 +615,7 @@ public class omlatransactions extends AppCompatActivity {
 
         }
     };
+
     public static Bitmap resizeImage(Bitmap bitmap, int w, boolean ischecked) {
 
         Bitmap BitmapOrg = bitmap;
@@ -563,7 +628,7 @@ public class omlatransactions extends AppCompatActivity {
         if (!ischecked) {
             int newWidth = w;
             // int newHeight = height * w / width;
-            int newHeight = height ;
+            int newHeight = height;
 
             float scaleWidth = ((float) newWidth) / width;
             float scaleHeight = ((float) newHeight) / height;
@@ -616,5 +681,17 @@ public class omlatransactions extends AppCompatActivity {
                 return list;
             }
         });
+    }
+
+    public Bitmap[][] splitBitmap(Bitmap bitmap, int xCount, int yCount) {
+        Bitmap[][] bitmaps = (Bitmap[][]) Array.newInstance(Bitmap.class, new int[]{xCount, yCount});
+        int width = bitmap.getWidth() / xCount;
+        int height = bitmap.getHeight() / yCount;
+        for (int x = 0; x < xCount; x++) {
+            for (int y = 0; y < yCount; y++) {
+                bitmaps[x][y] = Bitmap.createBitmap(bitmap, x * width, y * height, width, height);
+            }
+        }
+        return bitmaps;
     }
 }

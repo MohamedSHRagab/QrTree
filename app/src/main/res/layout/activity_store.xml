@@ -296,6 +296,42 @@
 
 
                         </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="report_quantity">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/btn_rounded2"
+                                android:gravity="center"
+                                android:text="تقرير جرد مفصل "
+                                android:textColor="#ffffff"
+                                android:textSize="18dp" />
+
+                            <RelativeLayout
+                                android:layout_width="50dp"
+                                android:layout_height="60dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/bluebox">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/ic_search_black_24dp"
+                                    android:tint="#ffffff" />
+
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="match_parent"

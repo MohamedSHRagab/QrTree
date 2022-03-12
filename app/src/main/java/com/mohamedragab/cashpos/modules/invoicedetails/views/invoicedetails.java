@@ -51,7 +51,7 @@ public class invoicedetails extends AppCompatActivity {
     DataBaseHelper db;
     List<sellproduct> productsList;
     ListView productsListView;
-    String value;
+    String value,client_name;
     invoicedetailsAdapter invoicedetailsAdapter;
     FloatingActionButton print_icon;
     ImageView printer_status;
@@ -64,6 +64,7 @@ public class invoicedetails extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("key");
+            client_name = extras.getString("client");
         }
         printer_status = (ImageView) findViewById(R.id.printer);
         if (MainActivity.ISCONNECT) {
@@ -96,13 +97,13 @@ public class invoicedetails extends AppCompatActivity {
                 productsList.add(sellproduct);
 
             }
-            invoicedetailsAdapter.setinvoicedetailsAdapter(productsList);
+            invoicedetailsAdapter.setinvoicedetailsAdapter(productsList,client_name);
             productsListView.setAdapter(invoicedetailsAdapter);
 
         } else {
             Toast.makeText(getBaseContext(), "لا يوجد منتجات حاليا !", Toast.LENGTH_SHORT).show();
             productsList.clear();
-            invoicedetailsAdapter.setinvoicedetailsAdapter(productsList);
+            invoicedetailsAdapter.setinvoicedetailsAdapter(productsList,client_name);
             productsListView.setAdapter(invoicedetailsAdapter);
 
         }

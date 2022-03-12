@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -102,15 +102,15 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="300dp"
-                android:layout_height="120dp"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo" />
 
@@ -121,7 +121,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="22dp"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -140,7 +140,7 @@
                     android:gravity="center"
                     android:text=" العميل "
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
                 <View
                     android:layout_width="4dp"
@@ -154,7 +154,7 @@
                     android:gravity="center"
                     android:text="فاتورة رقم "
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -172,7 +172,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
                 <View
                     android:layout_width="4dp"
@@ -186,7 +186,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
 
@@ -207,7 +207,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -218,7 +218,7 @@
                     android:gravity="center"
                     android:text=" الكاشير "
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -240,11 +240,11 @@
                     android:gravity="center"
                     android:text="الاجمالي"
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -254,7 +254,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -264,7 +264,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="92dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -288,7 +288,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -299,7 +298,7 @@
                     android:gravity="center"
                     android:text=" بعد الخصم "
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
 
                 <View
@@ -314,7 +313,7 @@
                     android:gravity="center"
                     android:text="الاجمالي "
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -332,7 +331,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <View
@@ -348,14 +347,13 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
 
@@ -367,7 +365,7 @@
                     android:gravity="center"
                     android:text=" مدفوع "
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
 
                 <View
@@ -382,7 +380,7 @@
                     android:gravity="center"
                     android:text=" نوع الدفع "
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -401,7 +399,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <View
@@ -417,14 +415,13 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
 
@@ -436,9 +433,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=" اجمالي المديونيه"
+                    android:text="المديونيه السابقة"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
                 <View
                     android:layout_width="4dp"
@@ -451,7 +448,7 @@
                     android:gravity="center"
                     android:text=" باقي "
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -461,7 +458,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/total_not_paid"
+                    android:id="@+id/pre_not_paid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -469,7 +466,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
                 <View
                     android:layout_width="4dp"
@@ -483,17 +480,47 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/total_not_paid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text=" اجمالي المديونيه"
+                    android:textColor="#000000"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+  <LinearLayout
                 android:id="@+id/delivery_lin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -505,7 +532,7 @@
                     android:background="@drawable/border"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -516,7 +543,7 @@
                     android:gravity="center"
                     android:text=" خدمة التوصيل "
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="10dp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -531,7 +558,7 @@
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="11dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -540,8 +567,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_marginBottom="40dp"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -550,6 +578,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:textColor="#000000"
                 android:text="م محمد لبرامج الكاشير 01093957856"
                 android:textSize="10dp" />

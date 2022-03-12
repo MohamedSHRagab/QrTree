@@ -151,9 +151,6 @@ public class newCashier extends AppCompatActivity {
                         if (name.getText().toString().trim().equals(res.getString(1))) {
                             Toast.makeText(getBaseContext(), "هذاالاسم تم استخدامه من قبل !", Toast.LENGTH_SHORT).show();
                             break;
-                        } else if (phone.getText().toString().trim().equals(res.getString(3))) {
-                            Toast.makeText(getBaseContext(), "هذا المحمول مستخدم بالفعل !", Toast.LENGTH_SHORT).show();
-                            break;
                         } else if (username.getText().toString().trim().equals(res.getString(7))) {
                             Toast.makeText(getBaseContext(), "اسم المستخدم هذا مستخدم بالفعل !", Toast.LENGTH_SHORT).show();
                             break;

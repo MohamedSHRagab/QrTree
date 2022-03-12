@@ -141,13 +141,15 @@
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="20dp" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:visibility="gone"
                         android:text="رقم الهاتف"
                         android:textSize="14sp" />
 
@@ -160,7 +162,6 @@
                         android:inputType="number"
                         android:maxLength="50"
                         android:maxLines="1"
-                        android:visibility="gone"
                         android:padding="5dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary" />
@@ -170,10 +171,11 @@
                         android:layout_height="20dp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="رقم الهاتف"
+                        android:text="UserName"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="@color/red"/>
@@ -184,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittextborder2"
                         android:gravity="center"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLength="50"
                         android:maxLines="1"
                         android:padding="5dp"
@@ -195,10 +197,11 @@
                         android:layout_height="20dp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="كلمة المرور"
+                        android:text="password"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="@color/red"/>
@@ -209,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittextborder2"
                         android:gravity="center"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLength="50"
                         android:maxLines="1"
                         android:padding="5dp"

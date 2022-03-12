@@ -147,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="المبلغ الي عليه"
+                        android:text="المبلغ الاجل الي عليه"
                         android:textSize="14sp" />
                     <EditText
                         android:id="@+id/paymoney"

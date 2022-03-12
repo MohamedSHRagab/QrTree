@@ -10,11 +10,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.Result;
+import com.mohamedragab.cashpos.R;
+import com.mohamedragab.cashpos.modules.buy.views.buy;
+import com.mohamedragab.cashpos.modules.exchange.views.exchange;
 import com.mohamedragab.cashpos.modules.sales.views.sales;
 import com.mohamedragab.cashpos.modules.store.views.addproduct;
 import com.mohamedragab.cashpos.modules.store.views.viewproducts;
-import com.mohamedragab.cashpos.R;
-import com.mohamedragab.cashpos.modules.buy.views.buy;
 import com.mohamedragab.cashpos.modules.store.wedgit.productAdapter;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -94,6 +95,9 @@ public class scanner extends AppCompatActivity {
             }
             if (value.equals("editpro")) {
                 productAdapter.code_et.setText(resultcode);
+
+            } if (value.equals("exchange")) {
+                exchange.autoCompleteTextView.setText(resultcode);
 
             }
             finish();

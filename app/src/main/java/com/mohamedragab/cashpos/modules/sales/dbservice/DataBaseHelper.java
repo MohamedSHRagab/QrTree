@@ -1611,7 +1611,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Cursor getdeliverytransbydate(String search, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_DelivTrans + " WHERE " + DelivTrans_COL_6 + " LIKE \'" + search + "\' AND " + DelivTrans_COL_1 + " LIKE \'" + id + "\' ;", null);
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_DelivTrans + " WHERE " + DelivTrans_COL_6 + " LIKE \'" + search + "\' AND " + DelivTrans_COL_2 + " LIKE \'" + id + "\' ;", null);
 
         return res;
     }
@@ -1620,7 +1620,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor res = null;
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            res = db.rawQuery("SELECT * FROM " + TABLE_DelivTrans + " WHERE " + DelivTrans_COL_1 + " LIKE \'" + id + "\' ;", null);
+            res = db.rawQuery("SELECT * FROM " + TABLE_DelivTrans + " WHERE " + DelivTrans_COL_2 + " LIKE \'" + id + "\' ;", null);
         } catch (Exception e) {
         } finally {
             return res;

@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mohamedragab.cashpos.modules.kist.views.customerKist">
+
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/gradient">
+        android:background="@drawable/gradient"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/linear"
@@ -26,32 +27,48 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:onClick="go_invoices"
-                android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
-                />
+                android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="عرض تفاصيل القسط"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="عرض تفاصيل القسط"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/total_kists"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
             <ImageView
                 android:id="@+id/printer"
                 android:layout_width="35dp"
                 android:layout_height="40dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:layout_alignParentRight="true"
                 android:onClick="go_home"
-                android:src="@drawable/printeroffline"
-                />
+                android:src="@drawable/printeroffline" />
         </RelativeLayout>
 
         <LinearLayout
@@ -60,47 +77,124 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/customername"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:drawableLeft="@drawable/ic_info_black_24dp"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/damenname"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edittextborder2"
+                    android:drawableLeft="@drawable/ic_info_black_24dp"
+                    android:gravity="center"
+                    android:onClick="go_invoices_details"
+                    android:text="تفاصيل الفاتورة"
+                    android:padding="5dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/customername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edittextborder2"
+                    android:drawableLeft="@drawable/ic_info_black_24dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:textColor="#000000"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="5dp"
-                android:padding="5dp"
-                android:textColor="#000000"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/damenphone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittextborder2"
-                android:gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/paid_kist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="#000000"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/notpaid_kist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="#000000"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/damenname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="#000000"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/damenphone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittextborder2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="#000000"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearitem"
             android:layout_width="match_parent"
@@ -112,10 +206,10 @@
                 android:id="@+id/paidornot"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:padding="7dp"
-                android:src="@drawable/testing"
                 android:layout_gravity="center"
-                />
+                android:padding="7dp"
+                android:src="@drawable/testing" />
+
             <TextView
                 android:id="@+id/paydate"
                 android:layout_width="match_parent"
@@ -123,8 +217,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
                 android:layout_weight="2"
-                android:text="تاريخ الدفع"
                 android:gravity="center"
+                android:text="تاريخ الدفع"
                 android:textColor="#ffffff"
                 android:textSize="12dp" />
 
@@ -147,8 +241,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
                 android:layout_weight="2"
-                android:text="ميعاد القسط"
                 android:gravity="center"
+                android:text="ميعاد القسط"
                 android:textColor="#ffffff"
                 android:textSize="12dp" />
 
@@ -159,18 +253,19 @@
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
                 android:layout_weight="2.3"
-                android:text="العدد"
                 android:gravity="center"
+                android:text="العدد"
                 android:textColor="#ffffff"
                 android:textSize="12dp" />
 
         </LinearLayout>
+
         <ListView
             android:id="@+id/list_kist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/print_icon"
         android:layout_width="wrap_content"
@@ -178,9 +273,9 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="15dp"
         android:onClick="pay_money"
-        app:srcCompat="@drawable/payment"
         android:tint="@color/white"
-        />
+        app:srcCompat="@drawable/payment" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_icon"
         android:layout_width="wrap_content"
@@ -188,7 +283,6 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="15dp"
         android:onClick="add_previous_kists"
-        app:srcCompat="@drawable/ic_add_black_24dp"
         android:tint="@color/white"
-        />
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

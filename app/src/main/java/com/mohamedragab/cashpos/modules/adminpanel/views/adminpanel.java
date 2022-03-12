@@ -3,10 +3,13 @@ package com.mohamedragab.cashpos.modules.adminpanel.views;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
 import com.mohamedragab.cashpos.modules.adminpanel.SampleFragmentPagerAdapter;
 import com.mohamedragab.cashpos.modules.adminpanel.models.adminmodel;
 import com.mohamedragab.cashpos.modules.adminprofile.adminprofile;
+import com.mohamedragab.cashpos.modules.dashboard.wedgits.shopAdapter;
 import com.mohamedragab.cashpos.modules.login.models.User;
 import com.mohamedragab.cashpos.modules.login.views.addnewshop;
 
@@ -41,7 +45,8 @@ public class adminpanel extends AppCompatActivity {
     public static ViewPager viewPager;
     LinearLayout linear3;
     Boolean statisticsvisible = false;
-    public static EditText name;
+    public static EditText phone;
+    ListView listshops;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,48 @@ public class adminpanel extends AppCompatActivity {
 
         shops_num = (TextView) findViewById(R.id.shops_num);
         admins_num = (TextView) findViewById(R.id.admin_num);
-        name = (EditText) findViewById(R.id.name);
+        phone = (EditText) findViewById(R.id.phone);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        listshops = (ListView) findViewById(R.id.list_shops);
+
+        listshops.setVisibility(View.GONE);
+        viewPager.setVisibility(View.VISIBLE);
+
+
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (phone.getText().toString().trim().equals("")) {
+                    listshops.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.VISIBLE);
+                } else {
+                    listshops.setVisibility(View.VISIBLE);
+                    viewPager.setVisibility(View.GONE);
+                    List<User> newshopList = new ArrayList<>();
+
+                    for (int i = 0; i < shopList.size(); i++) {
+                        if (shopList.get(i).getPhone().contains(phone.getText().toString().trim())) {
+                            newshopList.add(shopList.get(i));
+                        }
+                    }
+
+                    shopAdapter shopAdapter2 = new shopAdapter(adminpanel.this, newshopList);
+                    listshops.setAdapter(shopAdapter2);
+
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         adminList = new ArrayList<>();
         shopList = new ArrayList<>();
@@ -102,7 +148,6 @@ public class adminpanel extends AppCompatActivity {
                 }
 
                 progressBar.setVisibility(View.GONE);
-                viewPager = (ViewPager) findViewById(R.id.viewpager);
                 SampleFragmentPagerAdapter pagerAdapter =
                         new SampleFragmentPagerAdapter(getSupportFragmentManager(), adminpanel.this, adminList);
                 viewPager.setAdapter(pagerAdapter);

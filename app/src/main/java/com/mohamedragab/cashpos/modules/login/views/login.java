@@ -2,6 +2,7 @@ package com.mohamedragab.cashpos.modules.login.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ import com.mohamedragab.cashpos.modules.employees.models.Cashier;
 import com.mohamedragab.cashpos.modules.home.MainActivity;
 import com.mohamedragab.cashpos.modules.login.models.User;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
+
+import java.io.File;
 
 public class login extends AppCompatActivity {
     DatabaseReference reference;
@@ -71,6 +74,19 @@ public class login extends AppCompatActivity {
     }
 
     public void login(View view) {
+        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/database");
+        File file2 = new File(Environment.getExternalStorageDirectory() + "/cashpos/invoices");
+        File file3 = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid");
+        File file4 = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid");
+        File file5 = new File(Environment.getExternalStorageDirectory() + "/cashpos/buyinvoices");
+
+        file.mkdirs(); // Will create parent directories if not exists
+        file2.mkdirs(); // Will create parent directories if not exists
+        file3.mkdirs(); // Will create parent directories if not exists
+        file4.mkdirs(); // Will create parent directories if not exists
+        file5.mkdirs(); // Will create parent directories if not exists
+
+
         if (username.getText().toString().trim().equals("") || password.getText().toString().trim().equals("")) {
             Toast.makeText(getBaseContext(), "برجاء ادخال بيانات الدخول !", Toast.LENGTH_SHORT).show();
         } else {
@@ -221,6 +237,21 @@ public class login extends AppCompatActivity {
 
 
     public void limit(View view) {
+        File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/database");
+        File file2 = new File(Environment.getExternalStorageDirectory() + "/cashpos/invoices");
+        File file3 = new File(Environment.getExternalStorageDirectory() + "/cashpos/agelpaid");
+        File file4 = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid");
+        File file5 = new File(Environment.getExternalStorageDirectory() + "/cashpos/buyinvoices");
+
+        file.mkdirs(); // Will create parent directories if not exists
+        file2.mkdirs(); // Will create parent directories if not exists
+        file3.mkdirs(); // Will create parent directories if not exists
+        file4.mkdirs(); // Will create parent directories if not exists
+        file5.mkdirs(); // Will create parent directories if not exists
+
+
+
+
         SheredPrefranseHelper.addmoney_type(login.this, " جنيه ");
         Intent intent = new Intent(login.this, MainActivity.class);
         startActivity(intent);

@@ -1,34 +1,35 @@
 package com.mohamedragab.cashpos.modules.backup;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
+import com.mohamedragab.cashpos.modules.login.models.User;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public class backup extends AppCompatActivity {
     StorageReference storageReference;
@@ -40,7 +41,6 @@ public class backup extends AppCompatActivity {
         setContentView(R.layout.activity_backup);
         storageReference = FirebaseStorage.getInstance().getReference();
         progress = (ProgressBar) findViewById(R.id.progress);
-        zipFolder(Environment.getExternalStorageDirectory() + "/cashpos/database", Environment.getExternalStorageDirectory() + "/cashpos/database.zip");
 
     }
 
@@ -54,7 +54,7 @@ public class backup extends AppCompatActivity {
     public void openFolder() {
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/database.zip");
+        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/database/Database.db");
         sharingIntent.setType("image/png");
         sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
         startActivity(Intent.createChooser(sharingIntent, "قم بعمل مشاركه لملف قاعدة البيانات "));
@@ -66,13 +66,13 @@ public class backup extends AppCompatActivity {
         if (SheredPrefranseHelper.getUserData(getBaseContext()) != null) {
             database_reference = FirebaseDatabase.getInstance().getReference("Users").child(SheredPrefranseHelper.getUserData(getBaseContext()).getPhone());
         }
-        Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/cashpos/" + "database.zip"));
+        Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db"));
 
         StorageReference reference;
         if (SheredPrefranseHelper.getUserData(this) == null) {
-            reference = storageReference.child("uploads/" + SheredPrefranseHelper.getAdminData(this).getName().trim() + "/" + "database.zip");
+            reference = storageReference.child("uploads/" + SheredPrefranseHelper.getAdminData(this).getName().trim() + "/" + "/Database.db");
         } else {
-            reference = storageReference.child("uploads/" + SheredPrefranseHelper.getUserData(this).getName().trim() + "/" + "database.zip");
+            reference = storageReference.child("uploads/" + SheredPrefranseHelper.getUserData(this).getName().trim() + "/" + "/Database.db");
         }
         reference.putFile(uri)
                 .addOnSuccessListener(taskSnapshot -> {
@@ -100,38 +100,88 @@ public class backup extends AppCompatActivity {
         });
     }
 
-    private static void zipFolder(String inputFolderPath, String outZipPath) {
-        try {
-            FileOutputStream fos = new FileOutputStream(outZipPath);
-            ZipOutputStream zos = new ZipOutputStream(fos);
-            File srcFile = new File(inputFolderPath);
-            File[] files = srcFile.listFiles();
-            Log.d("", "Zip directory: " + srcFile.getName());
-            for (int i = 0; i < files.length; i++) {
-                Log.d("", "Adding file: " + files[i].getName());
-                byte[] buffer = new byte[1024];
-                FileInputStream fis = new FileInputStream(files[i]);
-                zos.putNextEntry(new ZipEntry(files[i].getName()));
-                int length;
-                while ((length = fis.read(buffer)) > 0) {
-                    zos.write(buffer, 0, length);
-                }
-                zos.closeEntry();
-                fis.close();
-            }
-            zos.close();
-        } catch (IOException ioe) {
-            Log.e("", ioe.getMessage());
-        }
-    }
 
     public void download_server(View view) {
-        if (SheredPrefranseHelper.getUserData(this) == null) {
-            Toast.makeText(getBaseContext(), SheredPrefranseHelper.getAdminData(getBaseContext()).getSupervisor() + "اتصل بالادمن في حالة فقدان البيانات الخاصه بكم ", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getBaseContext(), SheredPrefranseHelper.getUserData(getBaseContext()).getAdminid() + "اتصل بالادمن في حالة فقدان البيانات الخاصه بكم ", Toast.LENGTH_SHORT).show();
-        }
+
+            AlertDialog.Builder dialog2 = new AlertDialog.Builder(backup.this);
+            dialog2.setCancelable(false);
+            dialog2.setTitle("تاكيد تنزيل اخر قاعده بيانات علي السيرفر  !");
+            dialog2.setPositiveButton("تنزيل ", (dialog12, id) -> {
+                DatabaseReference reference;
+                progress.setVisibility(View.VISIBLE);
+                reference = FirebaseDatabase.getInstance().getReference("Users").child(SheredPrefranseHelper.getUserData(backup.this).getPhone());
+
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final User user = dataSnapshot.getValue(User.class);
+
+                        progress.setVisibility(View.GONE);
+                        assert user != null;
+                        if (user.getDatabaseupdate()!= null) {
+                            downloadfile(user.getDatabaseurl() + "");
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        progress.setVisibility(View.GONE);
+                    }
+                });
+
+            })
+                    .setNegativeButton("الغاء ", (dialog1, which) -> {
+
+                    });
+
+            final AlertDialog alert = dialog2.create();
+            alert.show();
+
+
     }
+
+
+    Boolean download_statue = false;
+
+    private Boolean downloadfile(String url) {
+       /* if (new File(Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db").delete()){
+
+        }
+        if (new File(Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db-journal").delete()){
+
+        }
+        */
+        ProgressDialog progressdialog = new ProgressDialog(backup.this);
+        progressdialog.setMessage("Please Wait....");
+        progressdialog.show();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(url);
+        final File rootPath = new File(Environment.getExternalStorageDirectory(), "cashpos/database");
+
+        if (!rootPath.exists()) {
+            rootPath.mkdirs();
+        }
+
+        final File localFile = new File(rootPath, "/Database.db");
+
+        storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+
+            // unpackZip(Environment.getExternalStorageDirectory() + "/cashpos/database/");
+            progressdialog.dismiss();
+            //Toast.makeText(backup.this, "تم تحميل قاعده البيانات المحل .", Toast.LENGTH_SHORT).show();
+            download_statue = true;
+
+
+        }).addOnFailureListener(exception -> {
+            progressdialog.dismiss();
+
+            Toast.makeText(backup.this, "حدثت مشكله في تحميل قاعده البيانات حاول تاكد من اتصالك بالانترنت وحاول مره اخري !", Toast.LENGTH_LONG).show();
+        });
+        return download_statue;
+    }
+
 
     public void go_home(View view) {
         onBackPressed();

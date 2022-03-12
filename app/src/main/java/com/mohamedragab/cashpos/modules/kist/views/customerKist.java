@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,15 +31,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.mohamedragab.cashpos.R;
+import com.mohamedragab.cashpos.base.AppConfig;
 import com.mohamedragab.cashpos.base.DateUtil;
+import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
+import com.mohamedragab.cashpos.modules.home.MainActivity;
+import com.mohamedragab.cashpos.modules.invoicedetails.views.invoicedetails;
+import com.mohamedragab.cashpos.modules.kist.adapters.kistAdapter;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
 import com.mohamedragab.cashpos.modules.sales.models.Kist;
 import com.mohamedragab.cashpos.modules.settings.models.shopInfo;
-import com.mohamedragab.cashpos.R;
-import com.mohamedragab.cashpos.base.AppConfig;
-import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
-import com.mohamedragab.cashpos.modules.home.MainActivity;
-import com.mohamedragab.cashpos.modules.kist.adapters.kistAdapter;
 import com.mohamedragab.cashpos.utils.Round;
 import com.zxy.tiny.Tiny;
 
@@ -51,12 +53,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /*import net.posprinter.posprinterface.ProcessData;
 import net.posprinter.posprinterface.UiExecute;
@@ -73,9 +77,10 @@ public class customerKist extends AppCompatActivity {
     ListView productsListView;
     String value;
     kistAdapter kistAdapter;
-    TextView damenName, damenPhone,date2;
+    TextView damenName, damenPhone, date2, paid_kist, notpaid_kist, total_kists;
     ImageView printer_status;
     LinearLayout container;
+    String invoice_num = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +135,9 @@ public class customerKist extends AppCompatActivity {
         invoiceid = (TextView) findViewById(R.id.customername);
         damenName = (TextView) findViewById(R.id.damenname);
         damenPhone = (TextView) findViewById(R.id.damenphone);
+        paid_kist = (TextView) findViewById(R.id.paid_kist);
+        notpaid_kist = (TextView) findViewById(R.id.notpaid_kist);
+        total_kists = (TextView) findViewById(R.id.total_kists);
 
         invoiceid.setText(value + "");
         productsListView = (ListView) findViewById(R.id.list_kist);
@@ -140,6 +148,9 @@ public class customerKist extends AppCompatActivity {
         kistAdapter = new kistAdapter(customerKist.this, kistList);
 
         Cursor res = db.getkestbyclient(value);
+
+        int paid_kist_val = 0, notpaid_kist_val = 0;
+        List<String> invoices = new ArrayList<>();
 
         if (res != null && res.getCount() > 0) {
             while (res.moveToNext()) {
@@ -162,17 +173,38 @@ public class customerKist extends AppCompatActivity {
                     kistList.add(kist);
                     damenName.setText(" الضامن : " + res.getString(9));
                     damenPhone.setText(" محمول : " + res.getString(10));
+                    if (kist.getStatue().equals("paid")) {
+                        paid_kist_val = paid_kist_val + 1;
+                    } else {
+                        notpaid_kist_val = notpaid_kist_val + 1;
+                    }
+                    invoices.add(res.getString(1));
+
                 }
 
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                List newlist = invoices.stream().distinct().collect(Collectors.toList());
+                for (int i = 0; i < newlist.size(); i++) {
+                    invoice_num = newlist.get(i).toString();
+                }
+            }
             kistAdapter.setKistAdapter(kistList);
             productsListView.setAdapter(kistAdapter);
+            paid_kist.setText("مدفوع : " + paid_kist_val + " قسط ");
+            notpaid_kist.setText("باقي : " + notpaid_kist_val + " قسط ");
+            total_kists.setText("الاجمالي : " + kistList.size() + " قسط ");
 
         } else {
             Toast.makeText(getBaseContext(), "لا يوجد أقساط حاليا !", Toast.LENGTH_SHORT).show();
             kistList.clear();
             kistAdapter.setKistAdapter(kistList);
             productsListView.setAdapter(kistAdapter);
+            paid_kist.setText("مدفوع : " + 0 + " قسط ");
+            notpaid_kist.setText("باقي : " + 0 + " قسط ");
+            total_kists.setText("الاجمالي : " + 0 + " قسط ");
+            total_kists.setText("الفواتير : " + "0");
+
         }
 
 
@@ -246,7 +278,7 @@ public class customerKist extends AppCompatActivity {
                 kist.setInvoice_id("قسط سابق");
                 kist.setStatue("not_paid");
                 kist.setDescription("قسط سابق");
-                kist.setPay_type(Double.parseDouble(money.getText().toString().trim())+"");
+                kist.setPay_type(Double.parseDouble(money.getText().toString().trim()) + "");
                 kist.setPaydate("");
 
                 if (SheredPrefranseHelper.getcurrentcashier(customerKist.this) != null) {
@@ -290,6 +322,18 @@ public class customerKist extends AppCompatActivity {
 
     }
 
+    public void go_invoices_details(View view) {
+        if (!invoice_num.equals("")) {
+            Intent i = new Intent(customerKist.this, invoicedetails.class);
+            i.putExtra("key", invoice_num);
+            startActivity(i);
+        } else {
+            Toast.makeText(getBaseContext(), "لا يوجد رقم فاتورة", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
     private class Receiver extends BroadcastReceiver {
 
         @Override
@@ -315,7 +359,7 @@ public class customerKist extends AppCompatActivity {
         if (val == 0) {
             listener = (view, year, monthOfYear, dayOfMonth) -> date.setText(DateUtil.getDateOnly(year, monthOfYear, dayOfMonth));
 
-        }else{
+        } else {
             listener = (view, year, monthOfYear, dayOfMonth) -> date2.setText(DateUtil.getDateOnly(year, monthOfYear, dayOfMonth));
 
         }
@@ -339,19 +383,13 @@ public class customerKist extends AppCompatActivity {
                 showSnackbar("failed");
             }
         }, () -> {
+
             List<byte[]> list = new ArrayList<byte[]>();
             list.add(DataForSendToPrinterPos80.initializePrinter());
-            list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66, 1));
-
             list.add(DataForSendToPrinterPos80.printRasterBmp(
-                    0, printBmp, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left, 656));
-            list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66, 1));
-
-
+                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Left, 590));
             return list;
-
         });
-
 
     }
 
@@ -397,10 +435,10 @@ public class customerKist extends AppCompatActivity {
                                     continue;
                                 }
                             } else if (kistList.get(i).getKist_value() == paid_money) {
-                                Boolean statue = db.updatekistbyName(kistList.get(i).getId(),  date2.getText().toString(), true, paid_money);
+                                Boolean statue = db.updatekistbyName(kistList.get(i).getId(), date2.getText().toString(), true, paid_money);
                                 break;
                             } else if (kistList.get(i).getKist_value() > paid_money) {
-                                Boolean statue = db.updatekistbyName(kistList.get(i).getId(),  date2.getText().toString(), false, kistList.get(i).getKist_value() - paid_money);
+                                Boolean statue = db.updatekistbyName(kistList.get(i).getId(), date2.getText().toString(), false, kistList.get(i).getKist_value() - paid_money);
                                 break;
                             }
 
@@ -409,7 +447,7 @@ public class customerKist extends AppCompatActivity {
                     com.mohamedragab.cashpos.modules.moneybox.models.money money2 = new com.mohamedragab.cashpos.modules.moneybox.models.money();
                     money2.setNotes(" قسط العميل:" + value);
                     money2.setValue(Double.parseDouble(money_value.getText().toString()));
-                    money2.setDate( date2.getText().toString());
+                    money2.setDate(date2.getText().toString());
                     final Cursor res3 = db.getallTransactions();
                     double total1 = 0;
                     if (res3 != null && res3.getCount() > 0) {
@@ -423,7 +461,7 @@ public class customerKist extends AppCompatActivity {
 
                     if (db.insert_date(money2)) {
                         final Dialog after_dialog = new Dialog(customerKist.this);
-                        after_dialog.setContentView(R.layout.after_pay_dialog);
+                        after_dialog.setContentView(R.layout.after_pay_dialog2);
                         // after_dialog.getWindow().setLayout(350, ViewGroup.LayoutParams.WRAP_CONTENT);
                         after_dialog.setCancelable(false);
 
@@ -434,7 +472,7 @@ public class customerKist extends AppCompatActivity {
                         LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
 
                         TextView date = (TextView) after_dialog.findViewById(R.id.date);
-                        date.setText( date2.getText().toString());
+                        date.setText(date2.getText().toString());
                         TextView time = (TextView) after_dialog.findViewById(R.id.time);
                         String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.US).format(new Date());
                         time.setText(currentTime);
@@ -490,17 +528,20 @@ public class customerKist extends AppCompatActivity {
                             print.setEnabled(false);
                         }
                         print.setOnClickListener(v1 -> {
-                            View image_png = (View) invoice_image;
+                            View image_png = invoice_image;
                             Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
                             Canvas canvas = new Canvas(returnedBitmap);
                             Drawable bgDrawable = image_png.getBackground();
                             if (bgDrawable != null) {
                                 bgDrawable.draw(canvas);
                             } else {
-                                canvas.drawColor(Color.WHITE);
+                                canvas.drawColor(-1);
                             }
                             image_png.draw(canvas);
-                            printImage(returnedBitmap);
+                            Bitmap[][] list_pic = splitBitmap(returnedBitmap, 1, (returnedBitmap.getHeight() / 1390) + 1);
+                            for (int i = 0; i < (returnedBitmap.getHeight() / 1390) + 1; i++) {
+                                printImage(list_pic[0][i]);
+                            }
                         });
                         share.setOnClickListener(v1 -> {
                             View image_png = (View) invoice_image;
@@ -515,12 +556,12 @@ public class customerKist extends AppCompatActivity {
                             image_png.draw(canvas);
 
                             try {
-                                File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid/",  client.getText().toString()+formattedDate + ".png");
+                                File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid/", client.getText().toString() + formattedDate + ".png");
                                 FileOutputStream out = new FileOutputStream(file);
                                 returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                 out.close();
                                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/kestpaid/" + client.getText().toString()+formattedDate  + ".png");
+                                Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/kestpaid/" + client.getText().toString() + formattedDate + ".png");
                                 sharingIntent.setType("image/png");
                                 sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
                                 startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
@@ -547,7 +588,7 @@ public class customerKist extends AppCompatActivity {
                             image_png.draw(canvas);
 
                             try {
-                                File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid/",  client.getText().toString()+formattedDate + ".png");
+                                File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/kestpaid/", client.getText().toString() + formattedDate + ".png");
                                 FileOutputStream out = new FileOutputStream(file);
                                 returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                 out.close();
@@ -624,19 +665,19 @@ public class customerKist extends AppCompatActivity {
                             if (SheredPrefranseHelper.getprinter_type(customerKist.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 576, false);
+                                b2 = resizeImage(b2, 790, false);
                             }
                         } else {
                             b2 = resizeImage(b2, 335, false);
                         }
                         printpicCode(b2);
                     } else {
-                        showSnackbar("bimap  " + b2.getWidth() + "  height: " + b2.getHeight());
+
                         if (SheredPrefranseHelper.getprinter_type(customerKist.this) != null) {
                             if (SheredPrefranseHelper.getprinter_type(customerKist.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 576, false);
+                                b2 = resizeImage(b2, 790, false);
                             }
                         } else {
                             b2 = resizeImage(b2, 335, false);
@@ -655,6 +696,7 @@ public class customerKist extends AppCompatActivity {
 
         }
     };
+
     public static Bitmap resizeImage(Bitmap bitmap, int w, boolean ischecked) {
 
         Bitmap BitmapOrg = bitmap;
@@ -667,7 +709,7 @@ public class customerKist extends AppCompatActivity {
         if (!ischecked) {
             int newWidth = w;
             // int newHeight = height * w / width;
-            int newHeight = height ;
+            int newHeight = height;
 
             float scaleWidth = ((float) newWidth) / width;
             float scaleHeight = ((float) newHeight) / height;
@@ -683,6 +725,18 @@ public class customerKist extends AppCompatActivity {
         }
 
         return resizedBitmap;
+    }
+
+    public Bitmap[][] splitBitmap(Bitmap bitmap, int xCount, int yCount) {
+        Bitmap[][] bitmaps = (Bitmap[][]) Array.newInstance(Bitmap.class, new int[]{xCount, yCount});
+        int width = bitmap.getWidth() / xCount;
+        int height = bitmap.getHeight() / yCount;
+        for (int x = 0; x < xCount; x++) {
+            for (int y = 0; y < yCount; y++) {
+                bitmaps[x][y] = Bitmap.createBitmap(bitmap, x * width, y * height, width, height);
+            }
+        }
+        return bitmaps;
     }
 
 }

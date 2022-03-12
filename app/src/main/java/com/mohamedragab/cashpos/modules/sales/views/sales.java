@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -127,7 +128,7 @@ public class sales extends AppCompatActivity {
     Boolean card_final_visibility = true;
     int invoice_id;
     Bitmap invoice_png_image;
-    private double Client_not_paid=0.0;
+    private double Client_not_paid = 0.0;
 
     @Override
     protected void onStart() {
@@ -526,6 +527,9 @@ public class sales extends AppCompatActivity {
             final RadioButton cash = (RadioButton) dialog.findViewById(R.id.cash);
             final RadioButton kest = (RadioButton) dialog.findViewById(R.id.kest);
             final RadioButton month = (RadioButton) dialog.findViewById(R.id.month);
+            final EditText getmoney = (EditText) dialog.findViewById(R.id.paidmoneytotal);
+            final TextView notpaidmoney = (TextView) dialog.findViewById(R.id.notpaidmoney);
+
 
             before_radio = (RadioButton) dialog.findViewById(R.id.before);
             before_radio.setOnClickListener(v -> {
@@ -595,6 +599,7 @@ public class sales extends AppCompatActivity {
             first_inkest2 = (EditText) dialog.findViewById(R.id.first2);
             final EditText damenname = (EditText) dialog.findViewById(R.id.damenname);
             final EditText damenphone = (EditText) dialog.findViewById(R.id.damenphone);
+            final CheckBox statue_checked = (CheckBox) dialog.findViewById(R.id.statue);
 
             profit_percentage.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -767,6 +772,10 @@ public class sales extends AppCompatActivity {
             });
             Button save = (Button) dialog.findViewById(R.id.save);
 
+            RadioButton pos = (RadioButton) dialog.findViewById(R.id.pos);
+            RadioButton bank = (RadioButton) dialog.findViewById(R.id.bank);
+            RadioButton box = (RadioButton) dialog.findViewById(R.id.box);
+
             Button cancel = (Button) dialog.findViewById(R.id.cancel);
             cancel.setOnClickListener(v -> dialog.dismiss());
 
@@ -775,14 +784,18 @@ public class sales extends AppCompatActivity {
 
             final Cursor res2 = db.getallomla();
             String omla_names[] = new String[res2.getCount() + 1];
+            omla_phones = new String[res2.getCount() + 1];
 
             if (res2.getCount() == 0) {
                 omla_names[0] = "اضغط لتحديد عميل";
+                omla_phones[0] = "";
             } else if (res2 != null && res2.getCount() > 0) {
                 int index = 1;
                 omla_names[0] = "اضغط لتحديد عميل";
+                omla_phones[0] = "";
                 while (res2.moveToNext()) {
                     omla_names[index] = res2.getString(1);
+                    omla_phones[index] = res2.getString(3);
                     index++;
                 }
             }
@@ -793,16 +806,41 @@ public class sales extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             omla.setAdapter(adapter);
             omla2.setAdapter(adapter);
+            LinearLayout notpaidcash = (LinearLayout) dialog.findViewById(R.id.notpaidcash);
 
             if (cash.isChecked()) {
+                notpaidcash.setVisibility(View.VISIBLE);
                 paid.setText(total_after_discount_value + "");
                 paid.setEnabled(false);
                 notpaid.setText(0 + "");
                 notpaid.setEnabled(false);
                 Linear.setVisibility(View.VISIBLE);
                 Linear2.setVisibility(View.GONE);
+                getmoney.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        if (getmoney.getText().toString().equals("")) {
+                            notpaidmoney.setText("");
+                        } else {
+                            double val = Double.parseDouble(getmoney.getText().toString().trim());
+                            notpaidmoney.setText((val-total_after_discount_value) +"");
+                        }
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
+
 
             } else if (agel.isChecked()) {
+                notpaidcash.setVisibility(View.GONE);
 
                 paid.setEnabled(true);
                 notpaid.setEnabled(true);
@@ -812,11 +850,14 @@ public class sales extends AppCompatActivity {
                 Linear2.setVisibility(View.GONE);
 
             } else if (kest.isChecked()) {
+                notpaidcash.setVisibility(View.GONE);
+
                 Linear.setVisibility(View.GONE);
                 Linear2.setVisibility(View.VISIBLE);
             }
             cash.setOnClickListener(v -> {
                 if (cash.isChecked()) {
+                    notpaidcash.setVisibility(View.VISIBLE);
 
                     paid.setText(total_after_discount_value + "");
                     paid.setEnabled(false);
@@ -841,6 +882,7 @@ public class sales extends AppCompatActivity {
                 }
             });
             kest.setOnClickListener(v -> {
+                notpaidcash.setVisibility(View.GONE);
 
                 Linear.setVisibility(View.GONE);
                 Linear2.setVisibility(View.VISIBLE);
@@ -848,6 +890,7 @@ public class sales extends AppCompatActivity {
 
             });
             agel.setOnClickListener(v -> {
+
                 if (cash.isChecked()) {
 
                     paid.setText(total_after_discount_value + "");
@@ -858,6 +901,7 @@ public class sales extends AppCompatActivity {
                     Linear2.setVisibility(View.GONE);
 
                 } else if (agel.isChecked()) {
+                    notpaidcash.setVisibility(View.GONE);
 
                     paid.setEnabled(true);
                     paid.setText(0 + "");
@@ -882,10 +926,10 @@ public class sales extends AppCompatActivity {
                                     paid.setText("");
 
                                 } else {*/
-                                    double notpaidvalue = Round.round((total_after_discount_value - Double.parseDouble(paid.getText().toString())), 3);
-                                    notpaid.setText(notpaidvalue + "");
+                                double notpaidvalue = Round.round((total_after_discount_value - Double.parseDouble(paid.getText().toString())), 3);
+                                notpaid.setText(notpaidvalue + "");
 
-                              // }
+                                // }
                             }
                         }
 
@@ -915,7 +959,7 @@ public class sales extends AppCompatActivity {
                                 dialog.dismiss();
                                 return;
                             }
-                            Client_not_paid=res.getDouble(6);
+                            Client_not_paid = res.getDouble(6);
                         }
 
                     }
@@ -972,8 +1016,19 @@ public class sales extends AppCompatActivity {
                         }
                         com.mohamedragab.cashpos.modules.moneybox.models.money money = new com.mohamedragab.cashpos.modules.moneybox.models.money();
                         money.setDate(current_date2.getText().toString());
-                        money.setNotes("مبيعات فاتوره رقم " + invoice_id);
-                        money.setValue(Round.round(total_after_discount_value, 3));
+                        if (box.isChecked()) {
+                            money.setValue(Round.round(total_after_discount_value, 3));
+                            money.setNotes("مبيعات فاتوره كاش رقم " + invoice_id);
+
+                        } else if (pos.isChecked()) {
+                            money.setValue(Round.round(0, 3));
+                            money.setNotes("مبيعات فاتوره كاش رقم " + invoice_id + " فيزا ");
+
+                        } else {
+                            money.setValue(Round.round(0, 3));
+                            money.setNotes("مبيعات فاتوره كاش رقم " + invoice_id + " تحويل بنكي ");
+
+                        }
 
                         final Cursor res3 = db.getallTransactions();
                         double total1 = 0;
@@ -985,7 +1040,13 @@ public class sales extends AppCompatActivity {
 
                         }
                         money.setTotalbefore(Round.round(total1, 3));
-                        double totalAfter = total1 + total_after_discount_value;
+                        double totalAfter = 0.0;
+
+                        if (box.isChecked()) {
+                            totalAfter = total1 + total_after_discount_value;
+                        } else {
+                            totalAfter = total1 + 0.0;
+                        }
 
                         money.setTotalAfter(Round.round(totalAfter, 3));
 
@@ -1070,7 +1131,15 @@ public class sales extends AppCompatActivity {
 
                                             paydialog.dismiss();
                                             final Dialog after_dialog = new Dialog(sales.this);
-                                            after_dialog.setContentView(R.layout.after_sales_dialog);
+                                            if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                                if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                                    after_dialog.setContentView(R.layout.after_sales_dialog2);
+                                                } else {
+                                                    after_dialog.setContentView(R.layout.after_sales_dialog);
+                                                }
+                                            } else {
+                                                after_dialog.setContentView(R.layout.after_sales_dialog);
+                                            }
                                             after_dialog.setCancelable(false);
 
 
@@ -1080,7 +1149,16 @@ public class sales extends AppCompatActivity {
                                             LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
                                             TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
                                             for (int i = 0; i < sales.productList.size(); i++) {
-                                                TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                                TableRow row;
+                                                if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                                    if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                                        row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item2, null);
+                                                    } else {
+                                                        row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                                    }
+                                                } else {
+                                                    row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                                }
                                                 ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                                 ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                                 ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1165,11 +1243,14 @@ public class sales extends AppCompatActivity {
                                             }
                                             TextView total_not_paid_txt = (TextView) after_dialog.findViewById(R.id.total_not_paid);
                                             total_not_paid_txt.setVisibility(View.VISIBLE);
-                                            total_not_paid_txt.setText((Client_not_paid)+"");
+                                            total_not_paid_txt.setText((Client_not_paid) + "");
 
                                             LinearLayout delivery_lin = (LinearLayout) after_dialog.findViewById(R.id.delivery_lin);
+                                            TextView delivery_txt = (TextView) after_dialog.findViewById(R.id.delivery);
+
                                             if (SheredPrefranseHelper.getdelivery(sales.this) != null) {
                                                 if (SheredPrefranseHelper.getdelivery(sales.this).equals("true")) {
+                                                    delivery_txt.setText(address.getText().toString() + " - " + omla_phones[omla.getSelectedItemPosition()] + " - " + delivery_val.get());
                                                 } else {
                                                     delivery_lin.setVisibility(View.GONE);
                                                 }
@@ -1264,7 +1345,15 @@ public class sales extends AppCompatActivity {
                                 cancel2.setOnClickListener(v2 -> {
                                     paydialog.dismiss();
                                     final Dialog after_dialog = new Dialog(sales.this);
-                                    after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                            after_dialog.setContentView(R.layout.after_sales_dialog2);
+                                        } else {
+                                            after_dialog.setContentView(R.layout.after_sales_dialog);
+                                        }
+                                    } else {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    }
                                     after_dialog.setCancelable(false);
 
                                     ImageView print = (ImageView) after_dialog.findViewById(R.id.print);
@@ -1273,7 +1362,16 @@ public class sales extends AppCompatActivity {
                                     LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
                                     TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
                                     for (int i = 0; i < sales.productList.size(); i++) {
-                                        TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        TableRow row;
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                            if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                                row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item2, null);
+                                            } else {
+                                                row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                            }
+                                        } else {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        }
                                         ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                         ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                         ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1358,7 +1456,7 @@ public class sales extends AppCompatActivity {
                                     }
                                     TextView total_not_paid_txt = (TextView) after_dialog.findViewById(R.id.total_not_paid);
                                     total_not_paid_txt.setVisibility(View.VISIBLE);
-                                    total_not_paid_txt.setText((Client_not_paid)+"");
+                                    total_not_paid_txt.setText((Client_not_paid) + "");
 
                                     LinearLayout delivery_lin = (LinearLayout) after_dialog.findViewById(R.id.delivery_lin);
                                     if (SheredPrefranseHelper.getdelivery(sales.this) != null) {
@@ -1458,7 +1556,15 @@ public class sales extends AppCompatActivity {
                                 paydialog.show();
                             } else {
                                 final Dialog after_dialog = new Dialog(sales.this);
-                                after_dialog.setContentView(R.layout.after_sales_dialog);
+                                if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog2);
+                                    } else {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    }
+                                } else {
+                                    after_dialog.setContentView(R.layout.after_sales_dialog);
+                                }
                                 after_dialog.setCancelable(false);
 
                                 ImageView print = (ImageView) after_dialog.findViewById(R.id.print);
@@ -1467,7 +1573,16 @@ public class sales extends AppCompatActivity {
                                 LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
                                 TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
                                 for (int i = 0; i < sales.productList.size(); i++) {
-                                    TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                    TableRow row;
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item2, null);
+                                        } else {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        }
+                                    } else {
+                                        row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                    }
                                     ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                     ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                     ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1552,7 +1667,7 @@ public class sales extends AppCompatActivity {
                                 }
                                 TextView total_not_paid_txt = (TextView) after_dialog.findViewById(R.id.total_not_paid);
                                 total_not_paid_txt.setVisibility(View.VISIBLE);
-                                total_not_paid_txt.setText(Client_not_paid+"");
+                                total_not_paid_txt.setText(Client_not_paid + "");
 
                                 LinearLayout delivery_lin = (LinearLayout) after_dialog.findViewById(R.id.delivery_lin);
                                 if (SheredPrefranseHelper.getdelivery(sales.this) != null) {
@@ -1658,8 +1773,7 @@ public class sales extends AppCompatActivity {
 
                     dialog.dismiss();
 
-                }
-                else if (agel.isChecked()) {
+                } else if (agel.isChecked()) {
 
                     if (omla.getSelectedItem().toString().equals("اضغط لتحديد عميل")) {
                         Toast.makeText(getBaseContext(), "برجاء اختيار عميل !", Toast.LENGTH_SHORT).show();
@@ -1677,7 +1791,7 @@ public class sales extends AppCompatActivity {
                                     dialog.dismiss();
                                     return;
                                 }
-                                Client_not_paid=res.getDouble(6);
+                                Client_not_paid = res.getDouble(6);
 
                             }
 
@@ -1756,10 +1870,22 @@ public class sales extends AppCompatActivity {
                                     Toast.makeText(getBaseContext(), "فشل تسجيل المنتج " + productList.get(i).getName(), Toast.LENGTH_SHORT).show();
                                 }
                             }
+
                             com.mohamedragab.cashpos.modules.moneybox.models.money money = new com.mohamedragab.cashpos.modules.moneybox.models.money();
                             money.setDate(current_date2.getText().toString());
-                            money.setNotes("مبيعات فاتوره رقم " + invoice_id);
-                            money.setValue(Round.round((total_after_discount_value - notpaidval), 3));
+                            if (box.isChecked()) {
+                                money.setValue((total_after_discount_value - notpaidval));
+                                money.setNotes("مبيعات فاتوره أجل رقم " + invoice_id);
+
+                            } else if (pos.isChecked()) {
+                                money.setValue(Round.round(0, 3));
+                                money.setNotes("مبيعات فاتوره أجل رقم " + invoice_id + " فيزا ");
+
+                            } else {
+                                money.setValue(Round.round(0, 3));
+                                money.setNotes("مبيعات فاتوره أجل رقم " + invoice_id + " تحويل بنكي ");
+
+                            }
 
                             final Cursor res3 = db.getallTransactions();
                             double total1 = 0;
@@ -1771,7 +1897,12 @@ public class sales extends AppCompatActivity {
 
                             }
                             money.setTotalbefore(Round.round(total1, 3));
-                            double totalAfter = total1 + (total_after_discount_value - notpaidval);
+                            double totalAfter = 0.0;
+                            if (box.isChecked()) {
+                                totalAfter = total1 + (total_after_discount_value - notpaidval);
+                            } else {
+                                totalAfter = total1 + 0.0;
+                            }
 
                             money.setTotalAfter(Round.round(totalAfter, 3));
 
@@ -1807,7 +1938,15 @@ public class sales extends AppCompatActivity {
 
                                 }
                                 final Dialog after_dialog = new Dialog(sales.this);
-                                after_dialog.setContentView(R.layout.after_sales_dialog);
+                                if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog2);
+                                    } else {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    }
+                                } else {
+                                    after_dialog.setContentView(R.layout.after_sales_dialog);
+                                }
                                 after_dialog.setCancelable(false);
 
                                 TextView invoice_text = (TextView) after_dialog.findViewById(R.id.invoice_num);
@@ -1818,7 +1957,16 @@ public class sales extends AppCompatActivity {
                                 LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
                                 TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
                                 for (int i = 0; i < sales.productList.size(); i++) {
-                                    TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                    TableRow row;
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item2, null);
+                                        } else {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        }
+                                    } else {
+                                        row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                    }
                                     ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                     ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                     ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1880,7 +2028,10 @@ public class sales extends AppCompatActivity {
                                 shopInfo info = SheredPrefranseHelper.getshopData(sales.this);
                                 TextView total_not_paid_txt = (TextView) after_dialog.findViewById(R.id.total_not_paid);
                                 total_not_paid_txt.setVisibility(View.VISIBLE);
-                                total_not_paid_txt.setText((Client_not_paid+notpaidval)+"");
+                                total_not_paid_txt.setText((Client_not_paid + notpaidval) + "");
+                                TextView pre_not_paid_txt = (TextView) after_dialog.findViewById(R.id.pre_not_paid);
+                                pre_not_paid_txt.setVisibility(View.VISIBLE);
+                                pre_not_paid_txt.setText(Client_not_paid  + "");
                                 if (info != null) {
                                     if (!info.getNotification().equals("")) {
                                         notification_text.setText(info.getNotification() + "");
@@ -2176,7 +2327,15 @@ public class sales extends AppCompatActivity {
                                         db.insert_kist_date(kist2);
                                     }
                                     final Dialog after_dialog = new Dialog(sales.this);
-                                    after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                            after_dialog.setContentView(R.layout.after_sales_dialog2);
+                                        } else {
+                                            after_dialog.setContentView(R.layout.after_sales_dialog);
+                                        }
+                                    } else {
+                                        after_dialog.setContentView(R.layout.after_sales_dialog);
+                                    }
                                     after_dialog.setCancelable(false);
 
                                     TextView invoice_text = (TextView) after_dialog.findViewById(R.id.invoice_num);
@@ -2187,7 +2346,16 @@ public class sales extends AppCompatActivity {
                                     LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
                                     TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
                                     for (int i = 0; i < sales.productList.size(); i++) {
-                                        TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        TableRow row;
+                                        if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
+                                            if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
+                                                row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item2, null);
+                                            } else {
+                                                row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                            }
+                                        } else {
+                                            row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
+                                        }
                                         ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                         ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                         ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -2412,6 +2580,8 @@ public class sales extends AppCompatActivity {
 
     }
 
+    String omla_phones[];
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -2419,14 +2589,18 @@ public class sales extends AppCompatActivity {
         DataBaseHelper omlaDataBaseHelper = new DataBaseHelper(this);
         final Cursor res2 = omlaDataBaseHelper.getallomla();
         String omla_names[] = new String[res2.getCount() + 1];
+        String omla_phones[] = new String[res2.getCount() + 1];
 
         if (res2.getCount() == 0) {
             omla_names[0] = "اضغط لتحديد عميل";
+            omla_phones[0] = "";
         } else if (res2 != null && res2.getCount() > 0) {
             int index = 1;
             omla_names[0] = "اضغط لتحديد عميل";
+            omla_phones[0] = "";
             while (res2.moveToNext()) {
                 omla_names[index] = res2.getString(1);
+                omla_phones[index] = res2.getString(3);
                 index++;
             }
         }
@@ -2459,7 +2633,7 @@ public class sales extends AppCompatActivity {
                             if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 790, false);
+                                b2 = resizeImage(b2, 576, false);
                             }
                         } else {
                             b2 = resizeImage(b2, 335, false);
@@ -2471,7 +2645,7 @@ public class sales extends AppCompatActivity {
                             if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
                                 b2 = resizeImage(b2, 335, false);
                             } else {
-                                b2 = resizeImage(b2, 790, false);
+                                b2 = resizeImage(b2, 576, false);
                             }
                         } else {
                             b2 = resizeImage(b2, 335, false);
@@ -2544,7 +2718,7 @@ public class sales extends AppCompatActivity {
             List<byte[]> list = new ArrayList<byte[]>();
             list.add(DataForSendToPrinterPos80.initializePrinter());
             list.add(DataForSendToPrinterPos80.printRasterBmp(
-                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Left, 590));
+                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Center, 576));
             return list;
         });
 
@@ -2675,6 +2849,145 @@ public class sales extends AppCompatActivity {
         this.autoCompleteTextView.setText("");
     }
 
+    public void go_print_poducts(View view) {
+        final Dialog after_dialog = new Dialog(sales.this);
+        after_dialog.setContentView(R.layout.prices_dialog);
+        after_dialog.setCancelable(false);
+
+        ImageView print = (ImageView) after_dialog.findViewById(R.id.print);
+        ImageView share = (ImageView) after_dialog.findViewById(R.id.share);
+        ImageView close = (ImageView) after_dialog.findViewById(R.id.cancel);
+
+        LinearLayout invoice_image = (LinearLayout) after_dialog.findViewById(R.id.linear_invoice);
+        TableLayout table = (TableLayout) after_dialog.findViewById(R.id.table);
+        for (int i = 0; i < sales.productList.size(); i++) {
+            TableRow row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.price_item, null);
+
+            ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
+            ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
+            if (sales.pricesList.get(i).equals("one")) {
+                ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
+            } else if (sales.pricesList.get(i).equals("two")) {
+                ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice2() + "");
+            } else {
+                ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice3() + "");
+            }
+            table.addView(row);
+        }
+        table.requestLayout();
+
+
+
+
+        TextView date = (TextView) after_dialog.findViewById(R.id.date);
+        date.setText(current_date2.getText().toString());
+        TextView time = (TextView) after_dialog.findViewById(R.id.time);
+        String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.US).format(new Date());
+        time.setText(currentTime);
+
+        ImageView logo = (ImageView) after_dialog.findViewById(R.id.logo);
+        shopInfo info = SheredPrefranseHelper.getshopData(sales.this);
+        if (info != null) {
+            if (info.getImage() != null) {
+                logo.setImageBitmap(BitmapFactory.decodeByteArray(info.getImage(), 0, info.getImage().length));
+            } else {
+                logo.setVisibility(View.GONE);
+            }
+        }
+
+        if (!MainActivity.ISCONNECT) {
+            print.setImageResource(R.drawable.printeroffline);
+            print.setEnabled(false);
+        }
+        print.setOnClickListener(v1 -> {
+            View image_png = invoice_image;
+            Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(returnedBitmap);
+            Drawable bgDrawable = image_png.getBackground();
+            if (bgDrawable != null) {
+                bgDrawable.draw(canvas);
+            } else {
+                canvas.drawColor(-1);
+            }
+            image_png.draw(canvas);
+            Bitmap[][] list_pic = splitBitmap(returnedBitmap, 1, (returnedBitmap.getHeight() / 1390) + 1);
+            for (int i = 0; i < (returnedBitmap.getHeight() / 1390) + 1; i++) {
+                printImage(list_pic[0][i]);
+            }
+
+        });
+        share.setOnClickListener(v1 -> {
+            try {
+                View image_png = (View) invoice_image;
+                Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(returnedBitmap);
+                Drawable bgDrawable = image_png.getBackground();
+                if (bgDrawable != null) {
+                    bgDrawable.draw(canvas);
+                } else {
+                    canvas.drawColor(Color.WHITE);
+                }
+                image_png.draw(canvas);
+
+                try {
+                    File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/", invoice_number + ".png");
+                    FileOutputStream out = new FileOutputStream(file);
+                    returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                    out.close();
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/" + invoice_number + ".png");
+                    sharingIntent.setType("image/png");
+                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                    startActivity(Intent.createChooser(sharingIntent, "مشاركة المنتجات"));
+                    Toast.makeText(getBaseContext(), "تم حفظ الايصال في : " + file.toString(), Toast.LENGTH_LONG).show();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            } catch (Exception e) {
+                Toast.makeText(getBaseContext(), "الملف غير موجود !", Toast.LENGTH_SHORT).show();
+            }
+        });
+        close.setOnClickListener(v1 -> {
+            View image_png = (View) invoice_image;
+            Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(returnedBitmap);
+            Drawable bgDrawable = image_png.getBackground();
+            if (bgDrawable != null) {
+                bgDrawable.draw(canvas);
+            } else {
+                canvas.drawColor(Color.WHITE);
+            }
+            image_png.draw(canvas);
+
+            try {
+                File file = new File(Environment.getExternalStorageDirectory() + "/cashpos/", invoice_number + ".png");
+                FileOutputStream out = new FileOutputStream(file);
+                returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                out.close();
+                Toast.makeText(getBaseContext(), "تم حفظ الايصال في : " + file.toString(), Toast.LENGTH_LONG).show();
+                startActivity(new Intent(sales.this, sales.class));
+                finish();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        after_dialog.show();
+
+
+
+
+
+
+
+    }
+
     private class Receiver extends BroadcastReceiver {
 
         @Override
@@ -2730,8 +3043,8 @@ public class sales extends AppCompatActivity {
         }
         if (!ischecked) {
             int newWidth = w;
-           // int newHeight = height * w / width;
-            int newHeight = height ;
+            // int newHeight = height * w / width;
+            int newHeight = height;
 
             float scaleWidth = ((float) newWidth) / width;
             float scaleHeight = ((float) newHeight) / height;
@@ -2748,6 +3061,7 @@ public class sales extends AppCompatActivity {
 
         return resizedBitmap;
     }
+
     public Bitmap[][] splitBitmap(Bitmap bitmap, int xCount, int yCount) {
         Bitmap[][] bitmaps = (Bitmap[][]) Array.newInstance(Bitmap.class, new int[]{xCount, yCount});
         int width = bitmap.getWidth() / xCount;

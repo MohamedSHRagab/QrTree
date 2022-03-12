@@ -22,6 +22,8 @@ import androidx.annotation.Nullable;
 
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.modules.invoice.views.invoiceView;
+import com.mohamedragab.cashpos.modules.omla.models.omla;
+import com.mohamedragab.cashpos.modules.omlatransactions.models.omlatransaction;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
 import com.mohamedragab.cashpos.modules.sales.models.invoice;
 import com.mohamedragab.cashpos.modules.sales.models.sellproduct;
@@ -40,6 +42,7 @@ public class invoicedetailsAdapter extends ArrayAdapter {
     List<sellproduct> products;
     Context con;
     DataBaseHelper db;
+    String client;
 
     public invoicedetailsAdapter(Context context, List<sellproduct> sellproduct) {
         super(context, R.layout.invoicedetails_item, R.id.productname, sellproduct);
@@ -48,8 +51,9 @@ public class invoicedetailsAdapter extends ArrayAdapter {
         db = new DataBaseHelper(con);
     }
 
-    public void setinvoicedetailsAdapter(List<sellproduct> sellproduct) {
+    public void setinvoicedetailsAdapter(List<sellproduct> sellproduct, String client) {
         this.products = sellproduct;
+        this.client = client;
     }
 
     @SuppressLint({"SetTextI18n", "ResourceAsColor"})
@@ -95,18 +99,34 @@ public class invoicedetailsAdapter extends ArrayAdapter {
 
     private void showdeleteDialog(sellproduct sellproduct) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(con);
-        builder1.setTitle("تحذير !");
+        builder1.setTitle("حذف الصنف من الفاتوره !");
         builder1.setIcon(R.drawable.notcompleted);
-        builder1.setMessage("هل تريد حذف الصنف من الفاتوره !");
-        builder1.setCancelable(true);
-
+        String[] items = {"خصم المبلغ من الخزينه", "خصم من حساب العميل"};
+        final int[] checkedItem = {0};
+        builder1.setSingleChoiceItems(items, checkedItem[0], (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    checkedItem[0] = 0;
+                    break;
+                case 1:
+                    checkedItem[0] = 1;
+                    break;
+            }
+        });
         builder1.setPositiveButton(
                 "حذف",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        deleteproduct(sellproduct);
-                        dialog.cancel();
+                (dialog, id) -> {
+                    if (checkedItem[0] == 1) {
+                        if (client != null && !client.equals("")) {
+                            deleteproduct(sellproduct, checkedItem);
+                        }else {
+                            Toast.makeText(con, "حذف الصنف من شاشه عرض فواتير البيع فقط !", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        deleteproduct(sellproduct, checkedItem);
+
                     }
+                    dialog.cancel();
                 });
 
         builder1.setNegativeButton(
@@ -123,7 +143,7 @@ public class invoicedetailsAdapter extends ArrayAdapter {
 
     }
 
-    private void deleteproduct(sellproduct sellproduct) {
+    private void deleteproduct(sellproduct sellproduct, int[] checked) {
         db.deletesellProduct(sellproduct.getId() + "");
         // Toast.makeText(con, "تم حذف الصنف من الفاتوره .", Toast.LENGTH_SHORT).show();
         String sellproductName = sellproduct.getName();
@@ -161,16 +181,56 @@ public class invoicedetailsAdapter extends ArrayAdapter {
                 double totalAfter = Round.round((total - (sellproduct.getQuantity() * sellproduct.getSellprice())), 3);
                 Log.d("totalAfter", totalAfter + "");
                 money.setTotalAfter(totalAfter);
+                if (checked[0] == 0) {
+                    if (db.insert_date(money)) {//  Toast.makeText(con, "تم خصم المبلغ من حساب المورد !", Toast.LENGTH_SHORT).show();
 
-                if (db.insert_date(money)) {
-                    //  Toast.makeText(con, "تم خصم المبلغ من حساب المورد !", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(con, "فشل اضافه المبلغ في الصندوق ! ", Toast.LENGTH_SHORT).show();
 
+                    }
 
                 } else {
-                    Toast.makeText(con, "فشل اضافه المبلغ في الصندوق ! ", Toast.LENGTH_SHORT).show();
+                    Cursor res = db.getomla(client);
+                    if (res != null && res.getCount() > 0) {
+                        while (res.moveToNext()) {
+                            omla omla = new omla();
 
+                            omla.setId(res.getInt(0));
+                            omla.setName(res.getString(1));
+                            double newsouldpayvalue = res.getDouble(6) - (sellproduct.getQuantity() * sellproduct.getSellprice());
+
+                            omla.setPaymoney(Round.round(newsouldpayvalue, 3));
+                            omla.setHasmoney(res.getDouble(5));
+                            omla.setAddress(res.getString(2));
+                            omla.setPhone(res.getString(3));
+                            omla.setNotes(res.getString(4));
+                            omla.setMaxnotpaid(res.getDouble(7));
+
+                            if (db.updateData(omla)) {
+                                // Toast.makeText(sales.this, "تم اضافه المبلغ لحساب العميل !", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(con, "لم يحدث تغيير في حساب العميل !", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        omlatransaction omlatransaction = new omlatransaction();
+                        omlatransaction.setInvoiceId(sellproduct.getInvoice_id());
+                        omlatransaction.setDate(formattedDate2);
+                        omlatransaction.setNotpaid(0);
+                        omlatransaction.setName(client);
+                        omlatransaction.setProcess("ارجاع الصنف :" + sellproduct.getName());
+                        omlatransaction.setValue(Round.round(sellproduct.getQuantity() * sellproduct.getSellprice(), 3));
+
+
+                        if (db.insert_date(omlatransaction)) {
+
+                            //  Toast.makeText(con, "تم تسجيل تعاملات العميل ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Toast.makeText(con, "فشل تسجيل تعاملات العميل", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
                 }
-
             } else {
                 Toast.makeText(con, "حدث خطا في تعديل البيانات تاكد من ادخال بينات صحيحه !", Toast.LENGTH_SHORT).show();
 

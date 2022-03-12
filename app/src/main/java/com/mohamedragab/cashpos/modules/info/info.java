@@ -199,4 +199,57 @@ public class info extends AppCompatActivity {
         startActivity(new Intent(this, laterepairs.class));
 
     }
+
+    public void go_total_buy2(View view) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.total_money_dialog);
+        dialog.setCancelable(false);
+
+        TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(view1 -> dialog.dismiss());
+        TextView title = (TextView) dialog.findViewById(R.id.title);
+        title.setText("اجمالي رأس المال بسعر البيع 2");
+        TextView total_money = (TextView) dialog.findViewById(R.id.total_money);
+
+        DataBaseHelper db = new DataBaseHelper(getBaseContext());
+        Cursor res = db.getallproducts();
+        double total = 0;
+        if (res != null && res.getCount() > 0) {
+            while (res.moveToNext()) {
+                total += res.getDouble(13) * res.getDouble(6);
+            }
+            total_money.setText(Round.round(total, 3) + " " + SheredPrefranseHelper.getmoney_type(this));
+        }
+        dialog.show();
+        db.close();
+
+    }
+
+    public void go_total_buy3(View view) {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.total_money_dialog);
+        dialog.setCancelable(false);
+
+        TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(view1 -> dialog.dismiss());
+        TextView title = (TextView) dialog.findViewById(R.id.title);
+        title.setText("اجمالي رأس المال بسعر البيع 3");
+        TextView total_money = (TextView) dialog.findViewById(R.id.total_money);
+
+        DataBaseHelper db = new DataBaseHelper(getBaseContext());
+        Cursor res = db.getallproducts();
+        double total = 0;
+        if (res != null && res.getCount() > 0) {
+
+            while (res.moveToNext()) {
+                total += res.getDouble(14) * res.getDouble(6);
+            }
+            total_money.setText(Round.round(total, 3) + " " + SheredPrefranseHelper.getmoney_type(this));
+        }
+        dialog.show();
+        db.close();
+
+
+    }
 }

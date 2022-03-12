@@ -41,7 +41,17 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:onClick="go_adduser"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/adduser"
+                android:tint="@color/white"
+                />
 
         </RelativeLayout>
 

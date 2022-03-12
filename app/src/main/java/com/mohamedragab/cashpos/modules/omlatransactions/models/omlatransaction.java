@@ -4,6 +4,8 @@ package com.mohamedragab.cashpos.modules.omlatransactions.models;
 public class omlatransaction {
     private int id;
 
+
+
     public int getId() {
         return id;
     }

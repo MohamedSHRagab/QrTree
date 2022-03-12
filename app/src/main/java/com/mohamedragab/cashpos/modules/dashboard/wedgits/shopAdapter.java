@@ -2,6 +2,7 @@ package com.mohamedragab.cashpos.modules.dashboard.wedgits;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,16 +33,8 @@ import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.modules.login.models.User;
 import com.mohamedragab.cashpos.modules.prizes.views.addprize;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 
 public class shopAdapter extends ArrayAdapter {
@@ -213,14 +206,14 @@ public class shopAdapter extends ArrayAdapter {
         used.setOnClickListener(v -> {
             reference = FirebaseDatabase.getInstance().getReference("Users").child(shops.get(position).getPhone());
             if (user.getUsed().equals("true")) {
-                reference.child("used").setValue("false").addOnCompleteListener(task -> {
+                reference.child("used").setValue("false").addOnSuccessListener(task -> {
                     used.setImageResource(R.drawable.check_box2);
                     Toast.makeText(con, "تم فتح الحساب .", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {
                     Toast.makeText(con, "فشل فتح الحساب تأكد من اتصالك بالانترنت !", Toast.LENGTH_SHORT).show();
                 });
             } else if (user.getUsed().equals("false")) {
-                reference.child("used").setValue("true").addOnCompleteListener(task -> {
+                reference.child("used").setValue("true").addOnSuccessListener(task -> {
                     used.setImageResource(R.drawable.check_box);
                     Toast.makeText(con, "تم غلق الحساب .", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {
@@ -256,13 +249,11 @@ public class shopAdapter extends ArrayAdapter {
     Boolean download_statue = false;
 
     private Boolean downloadfile(String url) {
-       /* if (new File(Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db").delete()){
 
-        }
-        if (new File(Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db-journal").delete()){
+        ProgressDialog progressdialog = new ProgressDialog(con);
+        progressdialog.setMessage("Please Wait....");
+        progressdialog.show();
 
-        }
-        */
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl(url);
         final File rootPath = new File(Environment.getExternalStorageDirectory(), "cashpos/database");
@@ -271,58 +262,23 @@ public class shopAdapter extends ArrayAdapter {
             rootPath.mkdirs();
         }
 
-        final File localFile = new File(rootPath, "database.zip");
+        final File localFile = new File(rootPath, "Database.db");
 
         storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
 
-            if (unpackZip(Environment.getExternalStorageDirectory() + "/cashpos/database/", "database.zip")) {
-            }
+
+            progressdialog.dismiss();
             Toast.makeText(con, "تم تحميل قاعده البيانات المحل .", Toast.LENGTH_SHORT).show();
 
             download_statue = true;
         }).addOnFailureListener(exception -> {
+            progressdialog.dismiss();
+
             Toast.makeText(con, "حدثت مشكله في تحميل قاعده البيانات حاول تاكد من اتصالك بالانترنت وحاول مره اخري !", Toast.LENGTH_LONG).show();
         });
         return download_statue;
     }
 
-    private boolean unpackZip(String path, String zipname) {
-
-        InputStream is;
-        ZipInputStream zis;
-        try {
-            is = new FileInputStream(path + zipname);
-            zis = new ZipInputStream(new BufferedInputStream(is));
-            ZipEntry ze;
-
-            while ((ze = zis.getNextEntry()) != null) {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
-                int count;
-
-                String filename = ze.getName();
-                FileOutputStream fout = new FileOutputStream(path + filename);
-
-                // reading and writing
-                while ((count = zis.read(buffer)) != -1) {
-                    baos.write(buffer, 0, count);
-                    byte[] bytes = baos.toByteArray();
-                    fout.write(bytes);
-                    baos.reset();
-                }
-
-                fout.close();
-                zis.closeEntry();
-            }
-
-            zis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
 }
 
 

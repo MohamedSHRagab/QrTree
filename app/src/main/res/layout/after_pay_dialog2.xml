@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="10dp"
                     android:background="@drawable/border"
                     android:textStyle="bold" />
 
@@ -194,7 +194,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="13dp"
+                    android:textSize="10dp"
                     android:background="@drawable/border"
                     android:textStyle="bold" />
 
@@ -297,14 +297,16 @@
                 android:gravity="center"
                 android:textColor="#000000"
                 android:textSize="12dp"
+                android:layout_marginBottom="20dp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="#000000"
-                android:textSize="9dp"
+                android:textSize="8dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text=" لبرامج الكاشير م محمد رجب  01093957856"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/droidkofi"

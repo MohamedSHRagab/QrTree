@@ -9,6 +9,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -21,10 +23,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -50,6 +50,9 @@
         <activity android:name="com.mohamedragab.cashpos.modules.repair.views.omlarepair" />
         <activity
             android:name="com.mohamedragab.cashpos.modules.masroufreport.views.masroufreport"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mohamedragab.cashpos.modules.exchange.views.exchange"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.mohamedragab.cashpos.modules.employees.views.viewallcashiers"
