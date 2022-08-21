@@ -45,16 +45,16 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_marginTop="20dp"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
+                                android:onClick="go_company"
                                 android:src="@drawable/companylogo"
                                 app:civ_border_color="#ffffff"
-                                android:onClick="go_company"
                                 app:civ_border_width="2dp" />
 
                             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -63,7 +63,7 @@
                                 android:layout_height="100dp"
                                 android:src="@drawable/profileimage"
                                 app:civ_border_color="#ffffff"
-                                app:civ_border_width="2dp" />
+                                app:civ_border_width="1dp" />
                         </LinearLayout>
 
 
@@ -98,7 +98,7 @@
                                 android:text="(SAAS)  Software AS A Service  "
                                 android:textColor="@color/white"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -145,7 +145,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:fontFamily="sans-serif-medium"
-                                    android:text="10"
+                                    android:text="18"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="22sp" />
                             </LinearLayout>
@@ -171,7 +171,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:fontFamily="sans-serif-medium"
-                                    android:text="2"
+                                    android:text="4"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="22sp" />
                             </LinearLayout>
@@ -202,8 +202,8 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="20dp"
-                            android:gravity="center"
                             android:layout_toRightOf="@id/user_icon"
+                            android:gravity="center"
                             android:text="moharagab02@gmail.com"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="16sp" />

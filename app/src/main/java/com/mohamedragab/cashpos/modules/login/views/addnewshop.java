@@ -17,7 +17,11 @@ import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
 import com.mohamedragab.cashpos.modules.home.MainActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class addnewshop extends AppCompatActivity {
     EditText shopname, phone, address, password;
@@ -51,7 +55,9 @@ public class addnewshop extends AppCompatActivity {
         if (shopname.getText().toString().equals("") || phone.getText().toString().equals("") || address.getText().toString().equals("") || password.getText().toString().equals("")) {
             Toast.makeText(getBaseContext(), "برجاء تكمله البيانات الفارغه !", Toast.LENGTH_SHORT).show();
         } else {
-
+            Date c = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyhhmmss", Locale.US);
+            String formattedDate = df.format(c);
             final ProgressDialog dialog2 = ProgressDialog.show(addnewshop.this, "انتظر ...",
                     "برجاء الانتظار جاري اضافه بيانات المحل ", true);
             dialog2.show();
@@ -69,7 +75,7 @@ public class addnewshop extends AppCompatActivity {
             hashMap.put("lastseen", "false");
             hashMap.put("used", "false");
             hashMap.put("adminid", SheredPrefranseHelper.getAdminData(this).getId()+"");
-            hashMap.put("shoptype", shops.getSelectedItem().toString()+"");
+            hashMap.put("shoptype", formattedDate+"");
 
             reference = FirebaseDatabase.getInstance().getReference("Users").child(phone.getText().toString().trim());
 

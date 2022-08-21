@@ -62,12 +62,14 @@ public class shopmove extends AppCompatActivity {
 
         search = (TextView) findViewById(R.id.search_date);
         String date_type = getIntent().getStringExtra("date");
-
-        if (date_type.equals("0")) {
-            search.setOnClickListener(v -> DateDialog());
-        } else if (date_type.equals("1")) {
-            search.setOnClickListener(v -> MonthDialog());
+        if(date_type!=null){
+            if (date_type.equals("0")) {
+                search.setOnClickListener(v -> DateDialog());
+            } else if (date_type.equals("1")) {
+                search.setOnClickListener(v -> MonthDialog());
+            }
         }
+
         db = new DataBaseHelper(getBaseContext());
 
         sales = (TextView) findViewById(R.id.sales);
@@ -365,7 +367,7 @@ public class shopmove extends AppCompatActivity {
                         Date date_1 = df.parse(d1);
                         Date date_2 = df.parse(d2);
                         Date date = df.parse(d);
-                        if (date.after(date_1) && date.before(date_2)) {
+                        if ((date.after(date_1) && date.before(date_2))|| d.equals(d1) || d.equals(d2)) {
                             total += res.getDouble(4);
                         }
 
@@ -390,7 +392,7 @@ public class shopmove extends AppCompatActivity {
                         Date date_1 = df.parse(d1);
                         Date date_2 = df.parse(d2);
                         Date date = df.parse(d);
-                        if (date.after(date_1) && date.before(date_2)) {
+                        if ((date.after(date_1) && date.before(date_2))|| d.equals(d1) || d.equals(d2)) {
                             salestotal += res2.getInt(4);
                         }
 
@@ -419,7 +421,7 @@ public class shopmove extends AppCompatActivity {
                         Date date_1 = df.parse(d1);
                         Date date_2 = df.parse(d2);
                         Date date = df.parse(d);
-                        if (date.after(date_1) && date.before(date_2)) {
+                        if ((date.after(date_1) && date.before(date_2))|| d.equals(d1) || d.equals(d2)) {
                             Cursor invoice_res = db.getsellinvoicebyInvoiceId(res3.getString(1));
                             double discount = 0;
                             String discount_type = "";
@@ -460,7 +462,7 @@ public class shopmove extends AppCompatActivity {
                             Date date_1 = df.parse(d1);
                             Date date_2 = df.parse(d2);
                             Date date = df.parse(d);
-                            if (date.after(date_1) && date.before(date_2)) {
+                            if ((date.after(date_1) && date.before(date_2))|| d.equals(d1) || d.equals(d2)) {
 
                                 money money = new money();
 

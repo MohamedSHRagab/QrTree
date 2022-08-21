@@ -727,7 +727,7 @@ public class sales extends AppCompatActivity {
                             profit_percentage2.setText("");
 
                         } else {
-                            double afterkist = Round.round((total_after_discount_value - Double.parseDouble(first_inkest2.getText().toString() + "")), 3);
+                            double afterkist = Round.round((total_after_discount_value -(Double.parseDouble(first_inkest2.getText().toString().equals("")?"0.0":Double.parseDouble(first_inkest2.getText().toString()) + ""))), 3);
 
                             double totalpluspercentage2 = Round.round((afterkist + (afterkist * Double.parseDouble(profit_percentage2.getText().toString()) / 100)), 3);
                             total_after_first.setText(totalpluspercentage2 + "");
@@ -2718,7 +2718,7 @@ public class sales extends AppCompatActivity {
             List<byte[]> list = new ArrayList<byte[]>();
             list.add(DataForSendToPrinterPos80.initializePrinter());
             list.add(DataForSendToPrinterPos80.printRasterBmp(
-                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Center, 576));
+                    0, printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Left, 576));
             return list;
         });
 
@@ -2897,7 +2897,7 @@ public class sales extends AppCompatActivity {
 
         if (!MainActivity.ISCONNECT) {
             print.setImageResource(R.drawable.printeroffline);
-            print.setEnabled(false);
+            //print.setEnabled(false);
         }
         print.setOnClickListener(v1 -> {
             View image_png = invoice_image;
@@ -2957,11 +2957,13 @@ public class sales extends AppCompatActivity {
             Bitmap returnedBitmap = Bitmap.createBitmap(image_png.getWidth(), image_png.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(returnedBitmap);
             Drawable bgDrawable = image_png.getBackground();
+
             if (bgDrawable != null) {
                 bgDrawable.draw(canvas);
             } else {
                 canvas.drawColor(Color.WHITE);
             }
+
             image_png.draw(canvas);
 
             try {

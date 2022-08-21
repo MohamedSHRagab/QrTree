@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -51,13 +52,25 @@ public class backup extends AppCompatActivity {
         openFolder();
     }
 
-    public void openFolder() {
+   /* public void openFolder() {
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/database/Database.db");
         sharingIntent.setType("image/png");
         sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
         startActivity(Intent.createChooser(sharingIntent, "قم بعمل مشاركه لملف قاعدة البيانات "));
+    }*/
+    private static final String AUTHORITY = "com.mohamedragab.cashpos.fileprovider";
+
+    private void openFolder() {
+        String storage = Environment.getExternalStorageDirectory() + "/cashpos/database/Database.db";
+        File internalFile = new File(storage);
+        Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("application/pdf");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+        startActivity(Intent.createChooser(sharingIntent, "choose"));
     }
 
     DatabaseReference database_reference;

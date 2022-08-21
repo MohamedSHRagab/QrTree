@@ -222,7 +222,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor res = getallsellinvoices();
         if (SheredPrefranseHelper.getAdminData(context) == null && SheredPrefranseHelper.getUserData(context) == null) {
-            if (res.getCount() <= 10) {
+            if (res.getCount() <= 20) {
             } else {
                 Toast.makeText(context, "النسخه غير مفعله قم بتفعيل النسخه عن طريق التواصل مع الادمن 01093957856", Toast.LENGTH_LONG).show();
                 close();
@@ -688,13 +688,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         }
 
+    }public boolean updateDatabyName2(String name, double quantity,double buyprice) {
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TABLE_Product_COL_3, name);
+        contentValues.put(TABLE_Product_COL_7, quantity);
+        contentValues.put(TABLE_Product_COL_6, buyprice);
+
+        int result = db.update(TABLE_Product, contentValues, "NAME=?", new String[]{String.valueOf(name)});
+        if (result > 0) {
+            db.close();
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
     }
 
-    public Cursor getproducts(String search) {
+    public Cursor getproduct(String search) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = null;
         try {
-            res = db.rawQuery("SELECT * FROM " + TABLE_Product + " WHERE " + TABLE_Product_COL_3 + " LIKE \'" + search + "\' OR " + TABLE_Product_COL_2 + " LIKE \'" + search + "\';", null);
+            res = db.rawQuery("SELECT * FROM " + TABLE_Product + " WHERE " + TABLE_Product_COL_2 + " LIKE \'" + search + "\';", null);
         } catch (SQLiteException e) {
             e.printStackTrace();
         } finally {
@@ -1055,7 +1075,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean insert_date(omlatransaction omlatransaction) {
         Cursor res = getallomlatransactions();
         if (SheredPrefranseHelper.getAdminData(context) == null && SheredPrefranseHelper.getUserData(context) == null) {
-            if (res.getCount() <= 30) {
+            if (res.getCount() <= 40) {
             } else {
                 Toast.makeText(context, "النسخه غير مفعله قم بتفعيل النسخه عن طريق التواصل مع الادمن 01093957856", Toast.LENGTH_LONG).show();
                 close();
@@ -1215,7 +1235,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean insert_date(moredtransaction moredtransaction) {
         Cursor res = getallmored();
         if (SheredPrefranseHelper.getAdminData(context) == null && SheredPrefranseHelper.getUserData(context) == null) {
-            if (res.getCount() <= 20) {
+            if (res.getCount() <= 30) {
             } else {
                 Toast.makeText(context, "النسخه غير مفعله قم بتفعيل النسخه عن طريق التواصل مع الادمن 01093957856", Toast.LENGTH_LONG).show();
                 close();

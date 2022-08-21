@@ -192,7 +192,7 @@ public class invoiceView extends AppCompatActivity {
         month = mcalendar.get(Calendar.MONTH);
         day = mcalendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog.OnDateSetListener listener = (view, year, monthOfYear, dayOfMonth) -> {
-            search.setText(DateUtil.getDateOnly(year, monthOfYear, dayOfMonth));
+            e.setText(DateUtil.getDateOnly(year, monthOfYear, dayOfMonth));
             MediaPlayer mp = MediaPlayer.create(invoiceView.this, R.raw.finalsound);
             mp.start();
         };

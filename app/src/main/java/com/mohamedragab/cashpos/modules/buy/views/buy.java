@@ -146,30 +146,30 @@ public class buy extends AppCompatActivity {
                                 if (res.getInt(0) == productList.get(i).getId()) {
                                     quantityList.set(i, quantityList.get(i) + 1);
                                     autoCompleteTextView.setText("");
-                                    total_value += Round.round((res.getDouble(5) * 1),3);
-                                    added=true;
+                                    total_value += Round.round((res.getDouble(5) * 1), 3);
+                                    added = true;
                                     break;
                                 } else if (i == productList.size() - 1 && res.getInt(0) != productList.get(i).getId()) {
                                     productList.add(pro);
                                     autoCompleteTextView.setText("");
                                     quantityList.add(1.0);
-                                    total_value += Round.round((res.getDouble(5) * 1),3);
-                                    added=true;
+                                    total_value += Round.round((res.getDouble(5) * 1), 3);
+                                    added = true;
                                     break;
                                 }
                             }
-                            if (!added){
+                            if (!added) {
                                 productList.add(pro);
                                 autoCompleteTextView.setText("");
                                 quantityList.add(1.0);
-                                total_value += Round.round((res.getDouble(5) * 1),3);
+                                total_value += Round.round((res.getDouble(5) * 1), 3);
                             }
                         }
 
                     }
                     productAdapter.setproductAdapter(productList, listView);
                     listView.setAdapter(productAdapter);
-                    total.setText(Round.round(total_value ,3)+ SheredPrefranseHelper.getmoney_type(buy.this));
+                    total.setText(Round.round(total_value, 3) + SheredPrefranseHelper.getmoney_type(buy.this));
 
                 }
             }
@@ -222,23 +222,23 @@ public class buy extends AppCompatActivity {
                                 if (res.getInt(0) == productList.get(i).getId()) {
                                     quantityList.set(i, quantityList.get(i) + 1);
                                     autoCompleteTextView.setText("");
-                                    total_value += Round.round((res.getDouble(5) * 1),3);
-                                    added=true;
+                                    total_value += Round.round((res.getDouble(5) * 1), 3);
+                                    added = true;
                                     break;
                                 } else if (i == productList.size() - 1 && res.getInt(0) != productList.get(i).getId()) {
                                     productList.add(pro);
                                     autoCompleteTextView.setText("");
                                     quantityList.add(1.0);
-                                    total_value += Round.round((res.getDouble(5) * 1),3);
-                                    added=true;
+                                    total_value += Round.round((res.getDouble(5) * 1), 3);
+                                    added = true;
                                     break;
                                 }
                             }
-                            if (!added){
+                            if (!added) {
                                 productList.add(pro);
                                 autoCompleteTextView.setText("");
                                 quantityList.add(1.0);
-                                total_value += Round.round((res.getDouble(5) * 1),3);
+                                total_value += Round.round((res.getDouble(5) * 1), 3);
                             }
                         }
 
@@ -246,7 +246,7 @@ public class buy extends AppCompatActivity {
                     }
                     productAdapter.setproductAdapter(productList, listView);
                     listView.setAdapter(productAdapter);
-                    total.setText(Round.round(total_value,3) + SheredPrefranseHelper.getmoney_type(buy.this));
+                    total.setText(Round.round(total_value, 3) + SheredPrefranseHelper.getmoney_type(buy.this));
                 }
             }
         });
@@ -317,12 +317,12 @@ public class buy extends AppCompatActivity {
                 startActivity(new Intent(this, newmored.class));
             });
 
-            total.setText(Round.round(total_value,3) + SheredPrefranseHelper.getmoney_type(buy.this));
+            total.setText(Round.round(total_value, 3) + SheredPrefranseHelper.getmoney_type(buy.this));
             Button save = (Button) dialog.findViewById(R.id.save);
             Button cancel = (Button) dialog.findViewById(R.id.cancel);
             cancel.setOnClickListener(v -> dialog.dismiss());
 
-             Spinner_mored = (Spinner) dialog.findViewById(R.id.omalaspinner);
+            Spinner_mored = (Spinner) dialog.findViewById(R.id.omalaspinner);
             final Cursor res2 = db.getallmored();
             String mored_names[] = new String[res2.getCount() + 1];
             if (res2.getCount() == 0) {
@@ -342,7 +342,7 @@ public class buy extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             Spinner_mored.setAdapter(adapter);
             if (cash.isChecked()) {
-                paid.setText(Round.round(total_value,3) + "");
+                paid.setText(Round.round(total_value, 3) + "");
                 paid.setEnabled(false);
                 notpaid.setText(0 + "");
                 notpaid.setEnabled(false);
@@ -351,12 +351,12 @@ public class buy extends AppCompatActivity {
                 paid.setEnabled(true);
                 notpaid.setEnabled(true);
                 paid.setText(0 + "");
-                notpaid.setText(Round.round(total_value ,3)+ "");
+                notpaid.setText(Round.round(total_value, 3) + "");
 
             }
             cash.setOnClickListener(v -> {
                 if (cash.isChecked()) {
-                    paid.setText(Round.round(total_value,3) + "");
+                    paid.setText(Round.round(total_value, 3) + "");
                     paid.setEnabled(false);
                     notpaid.setText(0 + "");
                     notpaid.setEnabled(false);
@@ -365,13 +365,13 @@ public class buy extends AppCompatActivity {
                     paid.setEnabled(true);
                     notpaid.setEnabled(true);
                     paid.setText(0 + "");
-                    notpaid.setText(Round.round(total_value,3) + "");
+                    notpaid.setText(Round.round(total_value, 3) + "");
 
                 }
             });
             agel.setOnClickListener(v -> {
                 if (cash.isChecked()) {
-                    paid.setText(Round.round(total_value ,3)+ "");
+                    paid.setText(Round.round(total_value, 3) + "");
                     paid.setEnabled(false);
                     notpaid.setText(0 + "");
                     notpaid.setEnabled(false);
@@ -379,7 +379,7 @@ public class buy extends AppCompatActivity {
                 } else {
                     paid.setEnabled(true);
                     paid.setText(0 + "");
-                    notpaid.setText(Round.round(total_value ,3)+ "");
+                    notpaid.setText(Round.round(total_value, 3) + "");
                     paid.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -393,12 +393,12 @@ public class buy extends AppCompatActivity {
                             } else {
                                 if (Double.parseDouble(paid.getText().toString()) > total_value) {
                                     Toast.makeText(getBaseContext(), "المبلغ المدفوع اكبر من الاجمالي !", Toast.LENGTH_SHORT).show();
-                                    notpaid.setText(Round.round(total_value,3) + "");
+                                    notpaid.setText(Round.round(total_value, 3) + "");
                                     paid.setText("");
 
                                 } else {
                                     double notpaidvalue = total_value - Double.parseDouble(paid.getText().toString());
-                                    notpaid.setText(Round.round(notpaidvalue,3) + "");
+                                    notpaid.setText(Round.round(notpaidvalue, 3) + "");
 
                                 }
                             }
@@ -421,11 +421,11 @@ public class buy extends AppCompatActivity {
 
                     double notpaidval = Double.parseDouble(notpaid.getText().toString());
 
-                    invoice.setInvoice_id(invoice_id+"");
+                    invoice.setInvoice_id(invoice_id + "");
                     invoice.setDate(current_date.getText().toString());
-                    invoice.setNotpaid(Round.round(notpaidval,3));
-                    invoice.setTotal(Round.round(total_value,3));
-                    if (SheredPrefranseHelper.getcurrentcashier(this)!=null){
+                    invoice.setNotpaid(Round.round(notpaidval, 3));
+                    invoice.setTotal(Round.round(total_value, 3));
+                    if (SheredPrefranseHelper.getcurrentcashier(this) != null) {
                         invoice.setCashier(SheredPrefranseHelper.getcurrentcashier(this).getName());
                     }
                     if (Spinner_mored.getSelectedItem().toString().equals("اضغط لتحديد مورد")) {
@@ -456,7 +456,7 @@ public class buy extends AppCompatActivity {
                         com.mohamedragab.cashpos.modules.moneybox.models.money money = new com.mohamedragab.cashpos.modules.moneybox.models.money();
                         money.setDate(current_date.getText().toString());
                         money.setNotes("مشتريات فاتوره رقم " + invoice_id);
-                        money.setValue( Round.round(total_value,3));
+                        money.setValue(Round.round(total_value, 3));
 
                         final Cursor res3 = db.getallTransactions();
                         double total1 = 0;
@@ -466,19 +466,26 @@ public class buy extends AppCompatActivity {
 
                             }
                         }
-                        money.setTotalbefore(Round.round(total1,3));
-                        double totalAfter = Round.round((total1 -  total_value),3);
+                        money.setTotalbefore(Round.round(total1, 3));
+                        double totalAfter = Round.round((total1 - total_value), 3);
 
-                        money.setTotalAfter(Round.round(totalAfter,3));
+                        money.setTotalAfter(Round.round(totalAfter, 3));
 
                         if (db.insert_date(money)) {
                             product pro;
 
                             for (int i = 0; i < productList.size(); i++) {
                                 pro = productList.get(i);
+                                double oldquantity = pro.getQuantity();
+                                double newquantity = pro.getQuantity() + quantityList.get(i);
+                                double oldcost = getproductbuyprice(pro.getCode_id());
+                                double newcost = pro.getBuyprice();
+                                double updatedbuyprice = ((oldcost * oldquantity) + (newcost * quantityList.get(i))) / newquantity;
+
+
                                 pro.setQuantity(pro.getQuantity() + quantityList.get(i));
 
-                                if (db.updateDatabyName(pro.getName(), pro.getQuantity())) {
+                                if (db.updateDatabyName2(pro.getName(), pro.getQuantity(),Round.round(updatedbuyprice,2) )) {
                                     dialog.dismiss();
                                 } else {
                                     Toast.makeText(getBaseContext(), "حدث خطا في تعديل البيانات تاكد من ادخال بينات صحيحه !", Toast.LENGTH_SHORT).show();
@@ -486,7 +493,7 @@ public class buy extends AppCompatActivity {
                             }
                             moredtransaction moredtransaction = new moredtransaction();
 
-                            moredtransaction.setInvoiceId(invoice_id+"");
+                            moredtransaction.setInvoiceId(invoice_id + "");
                             moredtransaction.setDate(current_date.getText().toString());
                             if (Spinner_mored.getSelectedItem().toString().equals("اضغط لتحديد مورد")) {
                                 moredtransaction.setName("لا يوجد");
@@ -495,10 +502,10 @@ public class buy extends AppCompatActivity {
                             }
                             moredtransaction.setNotpaid(0);
                             moredtransaction.setProcess("بيع");
-                            moredtransaction.setValue( Round.round(total_value,3));
+                            moredtransaction.setValue(Round.round(total_value, 3));
 
-                            if (db.insert_date(moredtransaction) ) {
-                                db .close();
+                            if (db.insert_date(moredtransaction)) {
+                                db.close();
                                 Toast.makeText(getBaseContext(), " تم تسجيل الفاتوره برقم  " + invoice_id, Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(buy.this, buy.class));
                                 finish();
@@ -517,12 +524,12 @@ public class buy extends AppCompatActivity {
 
                         double notpaidval = Double.parseDouble(notpaid.getText().toString());
 
-                        invoice.setInvoice_id(invoice_id+"");
+                        invoice.setInvoice_id(invoice_id + "");
                         invoice.setDate(current_date.getText().toString());
-                        invoice.setNotpaid(Round.round(notpaidval,3));
-                        invoice.setTotal(Round.round(total_value,3));
+                        invoice.setNotpaid(Round.round(notpaidval, 3));
+                        invoice.setTotal(Round.round(total_value, 3));
                         invoice.setCustomer_name(Spinner_mored.getSelectedItem().toString());
-                        if (SheredPrefranseHelper.getcurrentcashier(this)!=null){
+                        if (SheredPrefranseHelper.getcurrentcashier(this) != null) {
                             invoice.setCashier(SheredPrefranseHelper.getcurrentcashier(this).getName());
                         }
                         Cursor res = db.getmored(Spinner_mored.getSelectedItem().toString());
@@ -532,7 +539,7 @@ public class buy extends AppCompatActivity {
                                 mored mored = new mored();
                                 mored.setId(res.getInt(0));
                                 mored.setName(res.getString(1));
-                                double newsouldpayvalue = res.getDouble(6) +  notpaidval;
+                                double newsouldpayvalue = res.getDouble(6) + notpaidval;
                                 mored.setPaymoney(newsouldpayvalue);
                                 mored.setHasmoney(res.getDouble(5));
                                 mored.setAddress(res.getString(2));
@@ -564,7 +571,7 @@ public class buy extends AppCompatActivity {
                                 buyproduct.setBuyprice(productList.get(i).getBuyprice());
                                 buyproduct.setItemid(productList.get(i).getItemid());
 
-                                if ( db.insert_date(buyproduct)) {
+                                if (db.insert_date(buyproduct)) {
                                 } else {
                                     Toast.makeText(getBaseContext(), "فشل  تسجيل المنتج " + productList.get(i).getName(), Toast.LENGTH_SHORT).show();
 
@@ -573,7 +580,7 @@ public class buy extends AppCompatActivity {
                             com.mohamedragab.cashpos.modules.moneybox.models.money money = new com.mohamedragab.cashpos.modules.moneybox.models.money();
                             money.setDate(current_date.getText().toString());
                             money.setNotes("مشتريات فاتوره رقم " + invoice_id);
-                            money.setValue( Round.round((total_value - notpaidval),3));
+                            money.setValue(Round.round((total_value - notpaidval), 3));
 
                             final Cursor res3 = db.getallTransactions();
                             double total1 = 0;
@@ -582,19 +589,27 @@ public class buy extends AppCompatActivity {
                                     total1 = res3.getDouble(3);
                                 }
                             }
-                            money.setTotalbefore(Round.round(total1,3));
-                            double totalAfter = total1 -  (total_value - notpaidval);
+                            money.setTotalbefore(Round.round(total1, 3));
+                            double totalAfter = total1 - (total_value - notpaidval);
 
-                            money.setTotalAfter(Round.round(totalAfter,3));
+                            money.setTotalAfter(Round.round(totalAfter, 3));
 
-                            if ( db.insert_date(money)) {
+                            if (db.insert_date(money)) {
                                 product pro;
 
                                 for (int i = 0; i < productList.size(); i++) {
                                     pro = productList.get(i);
+
+                                    double oldquantity = pro.getQuantity();
+                                    double newquantity = pro.getQuantity() + quantityList.get(i);
+                                    double oldcost = getproductbuyprice(pro.getCode_id());
+                                    double newcost = pro.getBuyprice();
+                                    double updatedbuyprice = ((oldcost * oldquantity) + (newcost * quantityList.get(i))) / newquantity;
+
+
                                     pro.setQuantity(pro.getQuantity() + quantityList.get(i));
 
-                                    if (db.updateDatabyName(pro.getName(), pro.getQuantity())) {
+                                    if (db.updateDatabyName2(pro.getName(), pro.getQuantity(), Round.round(updatedbuyprice,2))) {
                                         dialog.dismiss();
                                     } else {
                                         Toast.makeText(getBaseContext(), "حدث خطا في تعديل البيانات تاكد من ادخال بينات صحيحه !", Toast.LENGTH_SHORT).show();
@@ -602,15 +617,15 @@ public class buy extends AppCompatActivity {
                                 }
                                 moredtransaction moredtransaction = new moredtransaction();
 
-                                moredtransaction.setInvoiceId(invoice_id+"");
+                                moredtransaction.setInvoiceId(invoice_id + "");
                                 moredtransaction.setDate(current_date.getText().toString());
                                 moredtransaction.setName(Spinner_mored.getSelectedItem().toString());
-                                moredtransaction.setNotpaid( Round.round(notpaidval,3));
+                                moredtransaction.setNotpaid(Round.round(notpaidval, 3));
                                 moredtransaction.setProcess("بيع");
-                                moredtransaction.setValue( Round.round((total_value - notpaidval),3));
+                                moredtransaction.setValue(Round.round((total_value - notpaidval), 3));
 
                                 if (db.insert_date(moredtransaction)) {
-                                    db .close();
+                                    db.close();
                                     Toast.makeText(getBaseContext(), " تم تسجيل الفاتوره برقم  " + invoice_id, Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(buy.this, buy.class));
                                     finish();
@@ -630,7 +645,9 @@ public class buy extends AppCompatActivity {
             dialog.show();
         }
     }
+
     Spinner category_spinner;
+
     public void showallproducts(View view) {
         final Dialog dialog = new Dialog(buy.this);
         dialog.setContentView(R.layout.productsdialog);
@@ -694,7 +711,7 @@ public class buy extends AppCompatActivity {
                     }
                     allproductsAdapter.setshopAdapter(allproductsList);
                     gridview.setAdapter(allproductsAdapter);
-                }else {
+                } else {
                     Toast.makeText(getBaseContext(), "لا يوجد منتجات تطابق التصنيف !", Toast.LENGTH_SHORT).show();
                     allproductsList.clear();
                     allproductsAdapter.setshopAdapter(allproductsList);
@@ -708,7 +725,6 @@ public class buy extends AppCompatActivity {
 
             }
         });
-
 
 
         TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
@@ -751,5 +767,43 @@ public class buy extends AppCompatActivity {
 
         }
 
+    }
+
+    double getproductbuyprice(String code) {
+        Cursor res = db.getproduct(code);
+        double buyprice = 0.0;
+
+        if (res != null && res.getCount() > 0) {
+            while (res.moveToNext()) {
+
+                product pro = new product();
+
+                pro.setId(res.getInt(0));
+                pro.setCode_id(res.getString(1));
+                pro.setName(res.getString(2));
+                pro.setSellprice(res.getDouble(4));
+                pro.setQuantity(res.getDouble(6));
+                pro.setDescription(res.getString(3));
+                pro.setBuyprice(res.getDouble(5));
+                pro.setExpiredate(res.getString(7));
+                byte[] imgByte = res.getBlob(9);
+
+                pro.setMeasure1(res.getString(10));
+                pro.setMeasure2(res.getString(11));
+                pro.setMeasure3(res.getString(12));
+                pro.setSellprice2(res.getDouble(13));
+                pro.setSellprice3(res.getDouble(14));
+                pro.setCategory(res.getString(15));
+                pro.setFactor2(res.getInt(16));
+                pro.setFactor3(res.getInt(17));
+                pro.setImage(imgByte);
+
+                buyprice = res.getDouble(5);
+                return buyprice;
+            }
+        } else {
+            buyprice = 0.0;
+        }
+        return buyprice;
     }
 }
