@@ -97,7 +97,7 @@
                 android:background="@drawable/edittextborder2"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text=" Copyright©2021   جميع الحقوق محفوظه "
+                android:text=" Copyright©2023   جميع الحقوق محفوظه "
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 

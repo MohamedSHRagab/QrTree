@@ -486,6 +486,7 @@ public class buy extends AppCompatActivity {
                                 pro.setQuantity(pro.getQuantity() + quantityList.get(i));
 
                                 if (db.updateDatabyName2(pro.getName(), pro.getQuantity(),Round.round(updatedbuyprice,2) )) {
+                            //    if (db.updateDatabyName(pro.getName(), pro.getQuantity())) {
                                     dialog.dismiss();
                                 } else {
                                     Toast.makeText(getBaseContext(), "حدث خطا في تعديل البيانات تاكد من ادخال بينات صحيحه !", Toast.LENGTH_SHORT).show();
@@ -609,7 +610,8 @@ public class buy extends AppCompatActivity {
 
                                     pro.setQuantity(pro.getQuantity() + quantityList.get(i));
 
-                                    if (db.updateDatabyName2(pro.getName(), pro.getQuantity(), Round.round(updatedbuyprice,2))) {
+                                    //  if (db.updateDatabyName2(pro.getName(), pro.getQuantity(),Round.round(updatedbuyprice,2) )) {
+                                    if (db.updateDatabyName(pro.getName(), pro.getQuantity())) {
                                         dialog.dismiss();
                                     } else {
                                         Toast.makeText(getBaseContext(), "حدث خطا في تعديل البيانات تاكد من ادخال بينات صحيحه !", Toast.LENGTH_SHORT).show();

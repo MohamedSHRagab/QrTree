@@ -636,6 +636,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         double quantity = product.getQuantity();
         String expiredate = product.getExpiredate();
         // int itemid = product.getItemid();
+        byte[] image = product.getImage();
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -648,6 +649,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(TABLE_Product_COL_6, buy_price);
         contentValues.put(TABLE_Product_COL_7, quantity);
         contentValues.put(TABLE_Product_COL_8, String.valueOf(expiredate));
+        contentValues.put(TABLE_Product_COL_10, image);
         contentValues.put(TABLE_Product_COL_11, product.getMeasure1());
         contentValues.put(TABLE_Product_COL_12, product.getMeasure2());
         contentValues.put(TABLE_Product_COL_13, product.getMeasure3());

@@ -3,10 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_addproduct.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_customers.xml" value="0.1" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_dashboardadmin.xml" value="0.22432432432432434" />
         <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_developerprofile.xml" value="0.22432432432432434" />
-        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_main.xml" value="0.10045045045045045" />
-        <entry key="..\:/projects/businesspos/app/src/main/res/layout/after_sales_dialog2.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/activity_settings.xml" value="0.29347826086956524" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/admin_info.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/after_pay_dialog.xml" value="0.29347826086956524" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/after_pay_dialog2.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/after_sales_dialog.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/after_sales_dialog2.xml" value="0.4" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/cart_dialog.xml" value="0.29347826086956524" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/nav_header_main.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/omla_item.xml" value="0.22432432432432434" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/row_item.xml" value="0.22432432432432434" />
         <entry key="..\:/projects/businesspos/app/src/main/res/layout/row_item2.xml" value="0.27717391304347827" />
+        <entry key="..\:/projects/businesspos/app/src/main/res/layout/shop_item.xml" value="0.22432432432432434" />
         <entry key="app/src/main/res/layout-ar/price_item.xml" value="0.15765765765765766" />
         <entry key="app/src/main/res/layout/activity_addnewcategory.xml" value="0.2902222222222222" />
         <entry key="app/src/main/res/layout/activity_adminpanel.xml" value="0.29414414414414414" />

@@ -48,6 +48,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9460182828885032~9393734780"/>
         <activity android:name="com.mohamedragab.cashpos.modules.employees.views.employee_login"></activity>
         <activity android:name="com.mohamedragab.cashpos.modules.employees.views.new_delivery" />
         <activity android:name="com.mohamedragab.cashpos.modules.employees.views.delivery_profile" />

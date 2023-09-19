@@ -1197,7 +1197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 AppConfig.check_cashier(SheredPrefranseHelper.getcurrentcashier(getBaseContext()).getId() + "", MainActivity.this, backup.class, "11");
             } else {
-                AppConfig.check_cashier(SheredPrefranseHelper.getcurrentcashier(getBaseContext()).getId() + "", MainActivity.this, backup.class, "11");
+                AppConfig.check_cashier(null + "", MainActivity.this, backup.class, "11");
 
             }
         }

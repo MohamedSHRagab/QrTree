@@ -1,8 +1,12 @@
 package com.mohamedragab.cashpos.modules.login.views;
 
+import static android.os.Build.VERSION.SDK_INT;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mohamedragab.cashpos.BuildConfig;
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.base.AppConfig;
 import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
@@ -50,6 +55,23 @@ public class login extends AppCompatActivity {
          db=new DataBaseHelper(login.this);
 
         setContentView(R.layout.activity_login);
+
+        if(SDK_INT >= 30) {
+
+                                try {
+                                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+                                    startActivity(intent);
+                                } catch (Exception ex) {
+                                    Intent intent = new Intent();
+                                    intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                                    startActivity(intent);
+                                }
+                            }
+
+
+
+
         username = (EditText) findViewById(R.id.username);
         password = (TextInputEditText) findViewById(R.id.password_et);
         progressBar = (ProgressBar) findViewById(R.id.progress);

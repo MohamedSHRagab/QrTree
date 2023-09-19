@@ -93,7 +93,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -142,7 +142,7 @@
                     android:text="إيصال إستلام نقدية "
                     android:textColor="#000000"
                     android:fontFamily="@font/two"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:padding="10dp"
                     android:textStyle="bold"/>
 

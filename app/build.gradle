@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mohamedragab.cashpos"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 40
         multiDexEnabled true
         versionName "40.0"
@@ -26,6 +26,7 @@ android {
         targetCompatibility = '1.8'
     }
 }
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
@@ -40,7 +41,7 @@ dependencies {
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -50,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
 
     implementation files('libs/posprinterconnectandsendsdk.jar')
     implementation 'com.zxy.android:tiny:0.0.6'

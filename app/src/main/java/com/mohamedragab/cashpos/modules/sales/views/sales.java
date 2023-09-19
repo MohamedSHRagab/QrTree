@@ -48,6 +48,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -94,6 +95,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.Random;
 
 
 public class sales extends AppCompatActivity {
@@ -129,6 +131,7 @@ public class sales extends AppCompatActivity {
     int invoice_id;
     Bitmap invoice_png_image;
     private double Client_not_paid = 0.0;
+    private static final String AUTHORITY = "com.mohamedragab.cashpos.fileprovider";
 
     @Override
     protected void onStart() {
@@ -481,6 +484,100 @@ public class sales extends AppCompatActivity {
         }
     }
 
+
+    public void pro_dialog(View view) {
+        View footer = new View(sales.this);
+        footer.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 100));
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.addnewpro);
+        dialog.setCancelable(true);
+
+        final Button save = (Button) dialog.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText name = (EditText) dialog.findViewById(R.id.name);
+                EditText sell = (EditText) dialog.findViewById(R.id.sell);
+                EditText buy = (EditText) dialog.findViewById(R.id.buy);
+                EditText quantity = (EditText) dialog.findViewById(R.id.quantity);
+                Random random = new Random();
+
+                String name_txt = name.getText().toString().trim();
+                double sell_val = Double.parseDouble(sell.getText().toString().trim());
+                double buy_val = Double.parseDouble(buy.getText().toString().trim());
+                double quan_val = Double.parseDouble(quantity.getText().toString().trim());
+
+                MediaPlayer mp = MediaPlayer.create(sales.this, R.raw.finalsound);
+                mp.start();
+
+                product pro = new product();
+
+                pro.setId(random.nextInt(5));
+                pro.setCode_id(random.nextInt(5) + "");
+                pro.setName(name_txt);
+                pro.setSellprice(sell_val);
+                pro.setQuantity(quan_val);
+                pro.setDescription("");
+                pro.setBuyprice(buy_val);
+                pro.setExpiredate("");
+                pro.setMeasure1("");
+                pro.setMeasure2("");
+                pro.setMeasure3("");
+                pro.setSellprice2(sell_val);
+                pro.setSellprice3(sell_val);
+                pro.setCategory("تصنيف0");
+                pro.setFactor2(0.0);
+                pro.setFactor3(0.0);
+
+                Boolean added = false;
+
+                for (int i = 0; i < productList.size(); i++) {
+
+                    if (i == productList.size() - 1) {
+                        productList.add(pro);
+                        autoCompleteTextView.setText("");
+                        quantityList.add(1.0);
+                        pricesList.add("one");
+                        total_value += Round.round((sell_val * 1.0), 3);
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added) {
+                    productList.add(pro);
+                    autoCompleteTextView.setText("");
+                    quantityList.add(1.0);
+                    pricesList.add("one");
+                }
+
+
+                productAdapter.setproductAdapter(productList, listView);
+                listView.setAdapter(productAdapter);
+                listView.addFooterView(footer, null, false);
+                double total_all = 0.0;
+                for (int i = 0; i < quantityList.size(); i++) {
+                    total_all += Round.round((quantityList.get(i) * productList.get(i).getSellprice()), 3);
+                }
+                total_value = Round.round(total_all, 3);
+                discount.setText(0 + "");
+                total.setText(total_all + SheredPrefranseHelper.getmoney_type(sales.this));
+
+
+                dialog.dismiss();
+            }
+        });
+        final TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
     public void DateDialog2() {
         Locale.setDefault(Locale.US);
         mcalendar = Calendar.getInstance();
@@ -727,7 +824,7 @@ public class sales extends AppCompatActivity {
                             profit_percentage2.setText("");
 
                         } else {
-                            double afterkist = Round.round((total_after_discount_value -(Double.parseDouble(first_inkest2.getText().toString().equals("")?"0.0":Double.parseDouble(first_inkest2.getText().toString()) + ""))), 3);
+                            double afterkist = Round.round((total_after_discount_value - (Double.parseDouble(first_inkest2.getText().toString().equals("") ? "0.0" : Double.parseDouble(first_inkest2.getText().toString()) + ""))), 3);
 
                             double totalpluspercentage2 = Round.round((afterkist + (afterkist * Double.parseDouble(profit_percentage2.getText().toString()) / 100)), 3);
                             total_after_first.setText(totalpluspercentage2 + "");
@@ -828,7 +925,7 @@ public class sales extends AppCompatActivity {
                             notpaidmoney.setText("");
                         } else {
                             double val = Double.parseDouble(getmoney.getText().toString().trim());
-                            notpaidmoney.setText((val-total_after_discount_value) +"");
+                            notpaidmoney.setText((val - total_after_discount_value) + "");
                         }
 
                     }
@@ -1159,6 +1256,8 @@ public class sales extends AppCompatActivity {
                                                 } else {
                                                     row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
                                                 }
+                                                ((TextView) row.findViewById(R.id.index_val)).setText((i + 1) + "");
+
                                                 ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                                 ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                                 ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1185,6 +1284,8 @@ public class sales extends AppCompatActivity {
                                             invoice_number = invoice_id + "";
 
                                             TextView date = (TextView) after_dialog.findViewById(R.id.date);
+                                            LinearLayout notpaidlinear = (LinearLayout) after_dialog.findViewById(R.id.notpaidlinear);
+                                            notpaidlinear.setVisibility(View.GONE);
                                             date.setText(current_date2.getText().toString());
                                             TextView time = (TextView) after_dialog.findViewById(R.id.time);
                                             String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.US).format(new Date());
@@ -1295,11 +1396,16 @@ public class sales extends AppCompatActivity {
                                                     FileOutputStream out = new FileOutputStream(file);
                                                     returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                                     out.close();
+
+
+                                                    String storage = Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" +invoice_number+ ".png";
+                                                    File internalFile = new File(storage);
+                                                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
                                                     Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                                    Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" + invoice_number + ".png");
                                                     sharingIntent.setType("image/png");
-                                                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                                    startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
+                                                    sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                                    startActivity(Intent.createChooser(sharingIntent, "jj"));
                                                     Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
 
                                                 } catch (FileNotFoundException e) {
@@ -1372,6 +1478,7 @@ public class sales extends AppCompatActivity {
                                         } else {
                                             row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
                                         }
+                                        ((TextView) row.findViewById(R.id.index_val)).setText((i + 1) + "");
                                         ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                         ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                         ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1416,6 +1523,9 @@ public class sales extends AppCompatActivity {
                                     } else {
                                         cashier.setText("" + "لا يوجد");
                                     }
+                                    LinearLayout notpaidlinear = (LinearLayout) after_dialog.findViewById(R.id.notpaidlinear);
+                                    notpaidlinear.setVisibility(View.GONE);
+
                                     TextView total_all_text = (TextView) after_dialog.findViewById(R.id.total_all);
                                     total_all_text.setText(Round.round(total_value, 3) + "");
                                     TextView total_after_discount_text = (TextView) after_dialog.findViewById(R.id.afterdiscount);
@@ -1505,12 +1615,18 @@ public class sales extends AppCompatActivity {
                                             FileOutputStream out = new FileOutputStream(file);
                                             returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                             out.close();
+
+
+                                            String storage = Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" +invoice_number+ ".png";
+                                            File internalFile = new File(storage);
+                                            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
                                             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                            Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" + invoice_number + ".png");
                                             sharingIntent.setType("image/png");
-                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                            startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
+                                            sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                            startActivity(Intent.createChooser(sharingIntent, "jj"));
                                             Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
+
 
                                         } catch (FileNotFoundException e) {
                                             e.printStackTrace();
@@ -1583,6 +1699,7 @@ public class sales extends AppCompatActivity {
                                     } else {
                                         row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
                                     }
+                                    ((TextView) row.findViewById(R.id.index_val)).setText((i + 1) + "");
                                     ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                     ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                     ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -1633,6 +1750,8 @@ public class sales extends AppCompatActivity {
                                 total_after_discount_text.setText(Round.round(total_after_discount_value, 3) + "");
                                 TextView invoice_kind = (TextView) after_dialog.findViewById(R.id.pay_kind);
                                 invoice_kind.setText("كاش");
+                                LinearLayout notpaidlinear = (LinearLayout) after_dialog.findViewById(R.id.notpaidlinear);
+                                notpaidlinear.setVisibility(View.GONE);
                                 TextView paid_text = (TextView) after_dialog.findViewById(R.id.paid);
                                 paid_text.setText(Round.round(total_after_discount_value, 3) + "");
                                 TextView not_paid_text = (TextView) after_dialog.findViewById(R.id.not_paid);
@@ -1717,11 +1836,16 @@ public class sales extends AppCompatActivity {
                                         FileOutputStream out = new FileOutputStream(file);
                                         returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                         out.close();
+
+
+                                        String storage = Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" +invoice_number+ ".png";
+                                        File internalFile = new File(storage);
+                                        Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
                                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" + invoice_number + ".png");
                                         sharingIntent.setType("image/png");
-                                        sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                        startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
+                                        sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                        startActivity(Intent.createChooser(sharingIntent, "jj"));
                                         Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
 
                                     } catch (FileNotFoundException e) {
@@ -1967,6 +2091,8 @@ public class sales extends AppCompatActivity {
                                     } else {
                                         row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
                                     }
+                                    ((TextView) row.findViewById(R.id.index_val)).setText((i + 1) + "");
+
                                     ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                     ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                     ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -2031,7 +2157,7 @@ public class sales extends AppCompatActivity {
                                 total_not_paid_txt.setText((Client_not_paid + notpaidval) + "");
                                 TextView pre_not_paid_txt = (TextView) after_dialog.findViewById(R.id.pre_not_paid);
                                 pre_not_paid_txt.setVisibility(View.VISIBLE);
-                                pre_not_paid_txt.setText(Client_not_paid  + "");
+                                pre_not_paid_txt.setText(Client_not_paid + "");
                                 if (info != null) {
                                     if (!info.getNotification().equals("")) {
                                         notification_text.setText(info.getNotification() + "");
@@ -2105,13 +2231,17 @@ public class sales extends AppCompatActivity {
                                         FileOutputStream out = new FileOutputStream(file);
                                         returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                         out.close();
-                                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                        Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" + invoice_number + ".png");
-                                        sharingIntent.setType("image/png");
-                                        sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                        startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
-                                        Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
 
+
+                                        String storage = Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" +invoice_number+ ".png";
+                                        File internalFile = new File(storage);
+                                        Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
+                                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                                        sharingIntent.setType("image/png");
+                                        sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                        startActivity(Intent.createChooser(sharingIntent, "jj"));
+                                        Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
                                     } catch (FileNotFoundException e) {
                                         e.printStackTrace();
                                     } catch (IOException e) {
@@ -2356,6 +2486,7 @@ public class sales extends AppCompatActivity {
                                         } else {
                                             row = (TableRow) LayoutInflater.from(sales.this).inflate(R.layout.row_item, null);
                                         }
+                                        ((TextView) row.findViewById(R.id.index_val)).setText((i + 1) + "");
                                         ((TextView) row.findViewById(R.id.name)).setText(productList.get(i).getName() + "");
                                         ((TextView) row.findViewById(R.id.price)).setText(productList.get(i).getSellprice() + "");
                                         ((TextView) row.findViewById(R.id.quantity)).setText(quantityList.get(i) + "");
@@ -2412,6 +2543,8 @@ public class sales extends AppCompatActivity {
                                     total_after_discount_text.setText(Round.round(total_after_discount_value, 3) + "");
                                     TextView invoice_kind = (TextView) after_dialog.findViewById(R.id.pay_kind);
                                     invoice_kind.setText("قسط");
+                                    LinearLayout notpaidlinear = (LinearLayout) after_dialog.findViewById(R.id.notpaidlinear);
+                                    notpaidlinear.setVisibility(View.GONE);
                                     TextView paid_text = (TextView) after_dialog.findViewById(R.id.paid);
                                     paid_text.setText(Round.round(mo2dam, 3) + "");
                                     TextView not_paid_text = (TextView) after_dialog.findViewById(R.id.not_paid);
@@ -2496,13 +2629,17 @@ public class sales extends AppCompatActivity {
                                                 FileOutputStream out = new FileOutputStream(file);
                                                 returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                                 out.close();
-                                                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                                                Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" + invoice_number + ".png");
-                                                sharingIntent.setType("image/png");
-                                                sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                                startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
-                                                Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
 
+
+                                                String storage = Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/" +invoice_number+ ".png";
+                                                File internalFile = new File(storage);
+                                                Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
+                                                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                                                sharingIntent.setType("image/png");
+                                                sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                                startActivity(Intent.createChooser(sharingIntent, "jj"));
+                                                Toast.makeText(getBaseContext(), "تم حفظ الفاتورة في : " + file.toString(), Toast.LENGTH_LONG).show();
                                             } catch (FileNotFoundException e) {
                                                 e.printStackTrace();
                                             } catch (IOException e) {
@@ -2631,24 +2768,24 @@ public class sales extends AppCompatActivity {
                     if (PosPrinterDev.PortType.USB != MainActivity.portType) {
                         if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
                             if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
-                                b2 = resizeImage(b2, 335, false);
+                                b2 = resizeImage(b2, 380, false);
                             } else {
                                 b2 = resizeImage(b2, 576, false);
                             }
                         } else {
-                            b2 = resizeImage(b2, 335, false);
+                            b2 = resizeImage(b2, 380, false);
                         }
                         printpicCode(b2);
                     } else {
 
                         if (SheredPrefranseHelper.getprinter_type(sales.this) != null) {
                             if (SheredPrefranseHelper.getprinter_type(sales.this).equals("58")) {
-                                b2 = resizeImage(b2, 335, false);
+                                b2 = resizeImage(b2, 380, false);
                             } else {
                                 b2 = resizeImage(b2, 576, false);
                             }
                         } else {
-                            b2 = resizeImage(b2, 335, false);
+                            b2 = resizeImage(b2, 380, false);
                         }
                         AppConfig.printUSBbitamp(b2);
 
@@ -2877,8 +3014,6 @@ public class sales extends AppCompatActivity {
         table.requestLayout();
 
 
-
-
         TextView date = (TextView) after_dialog.findViewById(R.id.date);
         date.setText(current_date2.getText().toString());
         TextView time = (TextView) after_dialog.findViewById(R.id.time);
@@ -2981,11 +3116,6 @@ public class sales extends AppCompatActivity {
             }
         });
         after_dialog.show();
-
-
-
-
-
 
 
     }

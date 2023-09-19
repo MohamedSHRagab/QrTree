@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mohamedragab.cashpos.R;
@@ -122,20 +123,25 @@ public class invoicedetails extends AppCompatActivity {
         startActivity(new Intent(invoicedetails.this, invoiceView.class));
     }
 
-    public void reprint_invoice(View view) {
-      try {
-          Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-          Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/invoices/"+invoiceid.getText().toString()+".png");
-          sharingIntent.setType("image/png");
-          sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-          startActivity(Intent.createChooser(sharingIntent, "مشاركة الفاتورة"));
+    private static final String AUTHORITY = "com.mohamedragab.cashpos.fileprovider";
 
-      }catch (Exception e){
-          Toast.makeText(getBaseContext(), "الملف غير موجود !", Toast.LENGTH_SHORT).show();
-      }
+    public void reprint_invoice(View view) {
+        try {
+            String storage = Environment.getExternalStorageDirectory() + "/cashpos/invoices/" + invoiceid.getText().toString()+ ".png";
+            File internalFile = new File(storage);
+            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("image/png");
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            startActivity(Intent.createChooser(sharingIntent, "jj"));
+
+
+        } catch (Exception e) {
+            Toast.makeText(getBaseContext(), "الملف غير موجود !", Toast.LENGTH_SHORT).show();
+        }
 
     }
-
     public void reshare_invoice(View view) {
       if (MainActivity.ISCONNECT){
           File docsFolder = new File(Environment.getExternalStorageDirectory() + "/cashpos/" + "/invoices");

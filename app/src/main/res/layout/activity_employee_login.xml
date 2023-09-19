@@ -104,7 +104,7 @@
                             android:layout_gravity="center"
                             android:text="Password"
                             android:gravity="center"
-                            android:textColor="@color/red"/>                            android:textSize="14sp" />
+                            android:textColor="@color/red"/>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -139,19 +139,31 @@
                             android:layout_height="55dp"
                             android:background="@drawable/btn"
                             android:onClick="login"
-                            android:text="تسجيل الدخول"
+                            android:layout_marginTop="10dp"
+                            android:text="  تسجيل الدخول "
                             android:textColor="@color/white"
                             android:textSize="18sp" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="الدخول بحساب التفعيل "
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="او "
                             android:onClick="go_login"
                             android:layout_marginTop="10dp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/btn_red"
+                            android:onClick="go_login"
+                            android:layout_marginTop="10dp"
+                            android:text="الدخول بحساب التفعيل والرجوع لادارة البرنامج"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -167,10 +179,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:text="في حالة فقدان البيانات الخاصة بكم برجاء الرجوع للأدمن"
+        android:text="في حالة فقدان البيانات الخاصة بكم برجاء الرجوع لادارة البرنامج"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 </RelativeLayout>

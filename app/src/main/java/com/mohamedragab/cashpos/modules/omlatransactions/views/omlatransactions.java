@@ -327,11 +327,12 @@ public class omlatransactions extends AppCompatActivity {
                                         FileOutputStream out = new FileOutputStream(file);
                                         returnedBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
                                         out.close();
-                                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+
                                         Uri screenshotUri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/cashpos/agelpaid/" + formattedDate2 + ".png");
+                                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                                         sharingIntent.setType("image/png");
                                         sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                        startActivity(Intent.createChooser(sharingIntent, "مشاركة الإيصال"));
+                                        startActivity(Intent.createChooser(sharingIntent, "jj"));
                                         Toast.makeText(getBaseContext(), "تم حفظ الايصال في : " + file.toString(), Toast.LENGTH_LONG).show();
 
                                     } catch (FileNotFoundException e) {

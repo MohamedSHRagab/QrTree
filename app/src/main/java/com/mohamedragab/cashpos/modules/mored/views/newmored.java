@@ -9,6 +9,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.mohamedragab.cashpos.modules.mored.models.mored;
 import com.mohamedragab.cashpos.modules.moredtransactions.models.moredtransaction;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
@@ -23,6 +30,7 @@ import java.util.Locale;
 public class newmored extends AppCompatActivity {
     EditText name, address, phone, notes, paymoney;
     DataBaseHelper db;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,44 @@ public class newmored extends AppCompatActivity {
         paymoney = (EditText) findViewById(R.id.paymoney);
 
         db = new DataBaseHelper(getBaseContext());
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+            }
+
+            @Override
+            public void onAdClosed() {
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdOpened() {
+                // covers the screen.
+            }
+        });
     }
 
     public void go_customers(View view) {

@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
 import com.mohamedragab.cashpos.modules.scanner.scanner;
@@ -37,6 +41,7 @@ public class viewproducts extends AppCompatActivity {
     productAdapter productAdapter;
     private ZXingScannerView scannerView;
     public static TextView total_money;
+    private AdView mAdView;
 
 
     @Override
@@ -48,6 +53,38 @@ public class viewproducts extends AppCompatActivity {
         productList = new ArrayList<>();
         db = new DataBaseHelper(getBaseContext());
 
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+            }
+
+            @Override
+            public void onAdClosed() {
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdOpened() {
+                // covers the screen.
+            }
+        });
         productAdapter = new productAdapter(viewproducts.this, productList);
 
         productListView = (ListView) findViewById(R.id.list_products);
