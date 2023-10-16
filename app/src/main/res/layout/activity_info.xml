@@ -327,10 +327,51 @@
                             android:layout_width="match_parent"
                             android:layout_height="37dp"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
                             android:background="@drawable/btn_rounded2"
                             android:gravity="center"
                             android:text=" عرض فواتير المبيعات"
+                            android:textColor="#ffffff"
+                            android:textSize="14dp" />
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/bluebox">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/report"
+                                android:tint="#ffffff" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>   <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="go_invoice_sales">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/btn_rounded2"
+                            android:gravity="center"
+                            android:text="تقرير يومي بمبيعات المنتجات"
                             android:textColor="#ffffff"
                             android:textSize="14dp" />
 

@@ -484,10 +484,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return res;
     }
-
+//        db.execSQL("CREATE TABLE " + TABLE_sellproducts + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,INVOICEID TEXT,QUANTITY DOUBLE, CODEID TEXT, NAME TEXT,DESCRIPTION TEXT,SELLPRICE DOUBLE,BUYPRICE DOUBLE,DATE TEXT, ITEMID TEXT)");
     public Cursor getsellproductbydate(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_sellproducts + " WHERE " + TABLE_sellproducts_COL_9 + " LIKE \'%" + date + "%\';", null);
+        Cursor res = db.rawQuery("SELECT ID,INVOICEID,SUM(QUANTITY),CODEID,NAME,DESCRIPTION,SELLPRICE FROM " + TABLE_sellproducts + " WHERE " + TABLE_sellproducts_COL_9 + " LIKE \'%" + date + "%\' Group by Name ;", null);
 
         return res;
     }

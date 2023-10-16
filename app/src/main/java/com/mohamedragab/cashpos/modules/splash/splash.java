@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mohamedragab.cashpos.R;
 import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
+import com.mohamedragab.cashpos.modules.employees.views.employee_login;
 import com.mohamedragab.cashpos.modules.home.MainActivity;
 import com.mohamedragab.cashpos.modules.login.views.login;
 
@@ -23,13 +24,13 @@ public class splash extends AppCompatActivity {
 
     public void go_intro() {
        if (SheredPrefranseHelper.getUserData(this) != null) {
-//            if (SheredPrefranseHelper.getcurrentcashier(getBaseContext()) == null) {
-//                startActivity(new Intent(this, employee_login.class));
-//                finish();
-//            } else {
+            if (SheredPrefranseHelper.getcurrentcashier(getBaseContext()) == null) {
+                startActivity(new Intent(this, employee_login.class));
+                finish();
+            } else {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
-           // }
+            }
         } else if (SheredPrefranseHelper.getAdminData(this) != null) {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();

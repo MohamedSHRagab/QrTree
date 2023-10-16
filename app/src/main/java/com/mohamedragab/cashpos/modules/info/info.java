@@ -9,21 +9,22 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mohamedragab.cashpos.R;
+import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
 import com.mohamedragab.cashpos.modules.buyinvoice.views.buyinvoice;
+import com.mohamedragab.cashpos.modules.dayinvoices.invoicedate;
+import com.mohamedragab.cashpos.modules.graph.graph;
 import com.mohamedragab.cashpos.modules.invoice.views.invoiceView;
+import com.mohamedragab.cashpos.modules.latekist.views.latekists;
 import com.mohamedragab.cashpos.modules.masroufreport.views.masroufreport;
+import com.mohamedragab.cashpos.modules.moneyboxreport.views.moneyboxreport;
 import com.mohamedragab.cashpos.modules.mored.views.moredmoney;
 import com.mohamedragab.cashpos.modules.omla.views.omlamoney;
+import com.mohamedragab.cashpos.modules.repair.views.laterepairs;
 import com.mohamedragab.cashpos.modules.sales.dbservice.DataBaseHelper;
 import com.mohamedragab.cashpos.modules.shopmove.views.shopmove;
 import com.mohamedragab.cashpos.modules.store.models.product;
 import com.mohamedragab.cashpos.modules.store.views.viewproducts;
-import com.mohamedragab.cashpos.R;
-import com.mohamedragab.cashpos.base.SheredPrefranseHelper;
-import com.mohamedragab.cashpos.modules.graph.graph;
-import com.mohamedragab.cashpos.modules.latekist.views.latekists;
-import com.mohamedragab.cashpos.modules.moneyboxreport.views.moneyboxreport;
-import com.mohamedragab.cashpos.modules.repair.views.laterepairs;
 import com.mohamedragab.cashpos.utils.Round;
 
 import java.text.SimpleDateFormat;
@@ -249,6 +250,12 @@ public class info extends AppCompatActivity {
         }
         dialog.show();
         db.close();
+
+
+    }
+
+    public void go_invoice_sales(View view) {
+        startActivity(new Intent(this, invoicedate.class));
 
 
     }

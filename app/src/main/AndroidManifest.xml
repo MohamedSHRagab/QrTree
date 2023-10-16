@@ -67,6 +67,9 @@
             android:name="com.mohamedragab.cashpos.modules.exchange.views.exchange"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name="com.mohamedragab.cashpos.modules.dayinvoices.invoicedate"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name="com.mohamedragab.cashpos.modules.employees.views.viewallcashiers"
             android:windowSoftInputMode="stateHidden" />
         <activity
